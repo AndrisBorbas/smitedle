@@ -11,7 +11,8 @@ export type SiteConfig = {
 
 export const siteConfig: SiteConfig = {
 	name: "Smitedle",
-	description: "The Smite god guessing game.",
+	description:
+		"The Smite god guessing game. A wordle game for the smite community.",
 	url: "https://smitedle.net",
 	ogImage: "https://smitedle.net/og.jpg",
 	links: {

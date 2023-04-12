@@ -1,15 +1,14 @@
 import "@/styles/globals.scss";
 
 import Script from "next/script";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 import { siteConfig, TRACKING_ID } from "@/data/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
-type RootLayoutProps = DetailedHTMLProps<
-	HTMLAttributes<HTMLElement>,
-	HTMLElement
->;
+type RootLayoutProps = {
+	children: React.ReactNode;
+	className?: string;
+};
 
 export const metadata = {
 	title: {

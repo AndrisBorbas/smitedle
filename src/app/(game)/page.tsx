@@ -1,13 +1,20 @@
+import { HomeGameLink } from "@/components/link/HomeGameLink";
+
 export default function IndexPage() {
 	return (
-		<section className="mx-auto text-center">
-			<h1>Smitedle</h1>
-			<h2>Guess the Smite god.</h2>
-			<section>
-				<div>God</div>
-				<div>Ability</div>
-				<div>Splash</div>
+		<>
+			<h2 className="text-xl">Guess the Smite god.</h2>
+			<section className="flex flex-col items-center gap-4">
+				<HomeGameLink
+					name="Classic"
+					description="Guess a god and see what you get right."
+				/>
+				<HomeGameLink name="Ability" description="Whose ability is it?" />
+				<HomeGameLink
+					name="Splash"
+					description="Inspect the splash art and guess the god."
+				/>
 			</section>
-		</section>
+		</>
 	);
 }
