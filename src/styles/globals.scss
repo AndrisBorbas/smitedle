@@ -1,0 +1,13 @@
+@import "./core.scss";
+
+:root {
+	color-scheme: dark light;
+}
+
+html {
+	@apply scroll-smooth;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+}

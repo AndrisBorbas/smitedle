@@ -1,0 +1,33 @@
+{
+	"extends": "@tsconfig/next/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./src/",
+		"paths": {
+			"@/*": ["*"],
+			"*": [""]
+		},
+		"strict": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"plugins": [
+			{
+				"name": "next"
+			},
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		]
+	},
+	"include": [
+		"*.config.js",
+		"next-env.d.ts",
+		"next.config.mjs",
+		".next/types/**/*.ts",
+		"**/*.mjs",
+		"**/*.cjs",
+		"**/*.js",
+		"**/*.ts",
+		"**/*.tsx"
+	],
+	"exclude": ["node_modules", "public", ".next/"]
+}
