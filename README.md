@@ -6,3 +6,7 @@
 ### Code for Smitedle website.
 
 If you have new site suggestions you can open a pr with one, if you know how or contact me on [twitter](https://twitter.com/AndrisBorbas).
+
+---
+
+Templates from https://github.com/shadcn/taxonomy and https://github.com/kripod/next-starter-strict
