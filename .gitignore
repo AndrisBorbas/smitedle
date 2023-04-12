@@ -37,6 +37,10 @@ public/**/*.map
 public/sw.js
 public/workbox-*.js
 
-public/data/
-
 *.tsbuildinfo
+
+public/data/rawGods.json
+
+public/data/test.json
+
+hirez/

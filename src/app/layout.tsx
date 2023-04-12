@@ -23,6 +23,7 @@ export const metadata = {
 		"Hi-Rez Studios",
 		"Hirez",
 		"Wordle",
+		"Smidle",
 		"Game",
 		"Guess",
 	],

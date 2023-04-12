@@ -78,7 +78,7 @@
 			}
 		},
 		{
-			"files": "src/pages/api/**",
+			"files": "src/{app,pages}/api/**",
 			"rules": {
 				"import/prefer-default-export": "off"
 			}

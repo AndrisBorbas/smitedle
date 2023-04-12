@@ -20,6 +20,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"@joshmiquel/hirez": "^3.0.1",
 		"@next/bundle-analyzer": "^13.3.0",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
 		"@tsconfig/next": "^1.0.5",
