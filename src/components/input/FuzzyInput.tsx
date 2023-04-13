@@ -18,6 +18,8 @@ export function FuzzyInput({
 }: FuzzyInputProps) {
 	const [data, setData] = useState<HirezGods>([]);
 	const [isFocused, setIsFocused] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
+	const [selected, setSelected] = useState("");
 
 	function searchItem(query: string) {
 		if (!query) {
@@ -30,7 +32,7 @@ export function FuzzyInput({
 		);
 		const result = filtered
 			.sort(fuzzySort(query, { iterator: (item) => item[selectionProperty] }))
-			.slice(0, 10);
+			.slice(0, 6);
 
 		if (result.length) {
 			setData(result);
@@ -46,9 +48,13 @@ export function FuzzyInput({
 					className="w-full border border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/10 focus:outline-none focus:ring-1 focus:ring-accent"
 					type="search"
 					placeholder="Type a gods name ..."
-					onChange={(e) => searchItem(e.target.value)}
+					onChange={(e) => {
+						setSelected(e.target.value);
+						searchItem(e.target.value);
+					}}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
+					value={selected}
 				/>
 
 				<button
@@ -58,10 +64,22 @@ export function FuzzyInput({
 					{">"}
 				</button>
 			</div>
-			{data.length > 0 && isFocused && (
-				<div className="mx-auto flex max-h-64 max-w-[20rem] flex-col gap-2 overflow-y-auto bg-slate-900 p-2">
+			{data.length > 0 && (isFocused || isHovered) && (
+				<div
+					className="mx-auto flex max-h-72 max-w-[20rem] flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
+				>
 					{data.map((item) => (
-						<button type="button" className="rounded p-2 hover:bg-slate-800">
+						<button
+							key={item.Name}
+							type="button"
+							className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
+							onClick={() => {
+								setSelected(item.Name);
+								setData([]);
+							}}
+						>
 							<Preview item={item} />
 						</button>
 					))}

@@ -16,14 +16,14 @@ export function Preview({ item }: PreviewProps) {
 				className={cn(
 					styles.imageShadow,
 					// TODO: postcss doesnt like custom classes in css modules, try again later
-					"after:shadow-inner-xl relative rounded",
+					"after:shadow-inner-xl relative border border-accent",
 				)}
 			>
 				<Image
 					src={item.godIcon_URL}
 					alt={`${item.Name} icon`}
-					width={64}
-					height={64}
+					width={48}
+					height={48}
 					unoptimized
 				/>
 			</span>
