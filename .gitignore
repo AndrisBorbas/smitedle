@@ -41,6 +41,6 @@ public/workbox-*.js
 
 /hirez/
 
-/public/data/generated
+/public/data/generated/*
 
 !/public/data/generated/gods.json
