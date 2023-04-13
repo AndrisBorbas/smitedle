@@ -21,13 +21,13 @@ export function Footer({ buildDate }: FooterProps) {
 		: "";
 
 	return (
-		<footer className="mt-auto flex flex-col justify-between bg-slate-800 p-4 sm:flex-row sm:p-8">
-			<div className="flex w-full flex-row justify-between">
-				<p className="pr-4 text-xs">
-					Smite is a registered trademark of Hi-Rez Studios. Some content and
-					images are the property of Hi-Rez Studios.
+		<footer className="mt-auto flex flex-col justify-between border-t border-accent bg-white/5 p-4 backdrop-blur sm:flex-row sm:p-8">
+			<div className="flex w-full flex-row justify-between text-xs">
+				<p className="pr-4">
+					Smite is a registered trademark of Hi-Rez Studios, Inc. Some content
+					and images are the property of Hi-Rez Studios, Inc.
 				</p>
-				<p className="text-xs decoration-yellow-300 underline-offset-2 hover:underline">
+				<p className="">
 					<TrackingLink
 						href="https://www.github.com/andrisborbas/smitedle"
 						target="_blank"

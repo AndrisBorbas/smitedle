@@ -1,5 +1,6 @@
 import { Smite } from "@joshmiquel/hirez";
 import fs from "fs";
+import path from "path";
 
 import { dlog } from "./utils";
 
@@ -66,31 +67,41 @@ export type HirezGods = HirezGod[];
 export const smiteApiDevId = parseInt(process.env.SMITE_API_DEV_ID ?? "0", 10);
 export const smiteApiAuthKey = process.env.SMITE_API_AUTH_KEY ?? "noKey";
 
-export const smiteApi = new Smite(smiteApiDevId, smiteApiAuthKey);
+export function smiteApi() {
+	return new Smite(smiteApiDevId, smiteApiAuthKey);
+}
 
 export async function getGods() {
-	const gods = await smiteApi.getGods();
+	const gods = await smiteApi().getGods();
 	return gods;
 }
 
 export async function saveRawGods(gods: any) {
-	fs.writeFile("public/data/rawGods.json", JSON.stringify(gods), (err) => {
-		if (err) {
-			dlog(err);
-			return;
-		}
-		dlog("Raw gods saved");
-	});
+	fs.writeFile(
+		"public/data/generated/rawGods.json",
+		JSON.stringify(gods),
+		(err) => {
+			if (err) {
+				dlog(err);
+				return;
+			}
+			dlog("Raw gods saved");
+		},
+	);
 }
 
 export async function saveGods(gods: HirezGods) {
-	fs.writeFile("public/data/gods.json", JSON.stringify(gods), (err) => {
-		if (err) {
-			dlog(err);
-			return;
-		}
-		dlog("Gods saved");
-	});
+	fs.writeFile(
+		"public/data/generated/gods.json",
+		JSON.stringify(gods),
+		(err) => {
+			if (err) {
+				dlog(err);
+				return;
+			}
+			dlog("Gods saved");
+		},
+	);
 }
 
 export function trimGods(gods: any[]) {
@@ -102,4 +113,10 @@ export function trimGods(gods: any[]) {
 	});
 
 	return gods as HirezGods;
+}
+
+export async function loadGeneratedGods() {
+	const p = path.join("public", "data", "generated", "gods.json");
+	const gods = await fs.readFileSync(`./${p}`, "utf-8");
+	return JSON.parse(gods) as HirezGods;
 }

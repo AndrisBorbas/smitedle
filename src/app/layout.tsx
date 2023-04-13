@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 
 import Script from "next/script";
 
+import { Footer } from "@/components/layout/Footer";
 import { siteConfig, TRACKING_ID } from "@/data/site";
 import { absoluteUrl, cn } from "@/lib/utils";
 
@@ -66,7 +67,7 @@ export const metadata = {
 
 export default function RootLayout({ children, className }: RootLayoutProps) {
 	return (
-		<html lang="en" className="bg-stone-950 font-sans text-white antialiased">
+		<html lang="en" className="bg-slate-950 font-sans text-white antialiased">
 			<head />
 
 			{/* Umami analytics */}
@@ -81,8 +82,10 @@ export default function RootLayout({ children, className }: RootLayoutProps) {
 			/>
 			{/* End Umami analytics */}
 
-			<body className="flex min-h-screen flex-col">
+			<body className="relative flex min-h-screen flex-col before:absolute before:inset-0 before:-z-50 before:bg-smite before:bg-cover before:bg-fixed before:bg-top before:bg-no-repeat before:opacity-25 before:content-['']">
 				<main className={cn("my-8 sm:my-16", className)}>{children}</main>
+
+				<Footer buildDate={Date.now()} />
 			</body>
 		</html>
 	);

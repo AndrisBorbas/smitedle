@@ -1,0 +1,10 @@
+.imageShadow {
+	& > img {
+		@apply rounded;
+	}
+
+	&::after {
+		content: "";
+		@apply absolute inset-0 rounded;
+	}
+}

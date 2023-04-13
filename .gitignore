@@ -39,8 +39,8 @@ public/workbox-*.js
 
 *.tsbuildinfo
 
-public/data/rawGods.json
+/hirez/
 
-public/data/test.json
+/public/data/generated
 
-hirez/
+!/public/data/generated/gods.json

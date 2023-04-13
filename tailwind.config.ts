@@ -3,13 +3,20 @@ import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
-	content: ["./src/**/*.{js,ts,tsx,scss,mdx}"],
+	content: ["./src/**/*.{js,ts,tsx,scss,css}"],
 	theme: {
 		extend: {
 			transitionTimingFunction: {
 				DEFAULT: defaultTheme.transitionTimingFunction.out,
 			},
-			colors: {},
+			colors: {
+				accent: {
+					DEFAULT: "#85784a",
+				},
+			},
+			backgroundImage: {
+				smite: "url('/images/bg.webp')",
+			},
 			fontFamily: {},
 		},
 	},

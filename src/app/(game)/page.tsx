@@ -3,7 +3,7 @@ import { HomeGameLink } from "@/components/link/HomeGameLink";
 export default function IndexPage() {
 	return (
 		<>
-			<h2 className="text-xl">Guess the Smite god.</h2>
+			<h2 className="mb-8 text-xl">Guess the Smite god.</h2>
 			<section className="flex flex-col items-center gap-4">
 				<HomeGameLink
 					name="Classic"
