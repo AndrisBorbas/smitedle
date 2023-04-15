@@ -1,20 +1,9 @@
-import { FuzzyInput } from "@/components/input/FuzzyInput";
+import { ClassicGame } from "@/components/games/Classic";
 import { loadGeneratedGods } from "@/lib/smiteApi";
 
-async function loadGods() {
-	const res = await loadGeneratedGods();
-
-	if (!res) {
-		throw new Error("Failed to load gods");
-	}
-	return res;
-}
-
 export default async function ClassicPage() {
-	const gods = await loadGods();
-	return (
-		<section className="mx-auto text-center">
-			<FuzzyInput initialData={gods} />
-		</section>
-	);
+	const gods = await loadGeneratedGods();
+	const actualGod = gods[Math.floor(Math.random() * gods.length)];
+	// console.log(actualGod.Name);
+	return <ClassicGame gods={gods} actualGod={actualGod} />;
 }

@@ -10,16 +10,21 @@ import { Preview } from "../display/Preview";
 export type FuzzyInputProps = {
 	initialData: HirezGods;
 	selectionProperty?: "Name";
+	selected: string;
+	setSelected: (value: string) => void;
+	submit: () => boolean;
 };
 
 export function FuzzyInput({
 	initialData,
 	selectionProperty = "Name",
+	selected,
+	setSelected,
+	submit,
 }: FuzzyInputProps) {
 	const [data, setData] = useState<HirezGods>([]);
 	const [isFocused, setIsFocused] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
-	const [selected, setSelected] = useState("");
 
 	function searchItem(query: string) {
 		if (!query) {
@@ -47,7 +52,7 @@ export function FuzzyInput({
 				<input
 					className="w-full border border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/10 focus:outline-none focus:ring-1 focus:ring-accent"
 					type="search"
-					placeholder="Type a gods name ..."
+					placeholder="Type a gods name..."
 					onChange={(e) => {
 						setSelected(e.target.value);
 						searchItem(e.target.value);
@@ -60,31 +65,38 @@ export function FuzzyInput({
 				<button
 					type="button"
 					className="border border-accent bg-white/5 p-4 text-accent ring-accent backdrop-blur hover:bg-white/10 hover:text-white hover:ring-1"
+					onClick={() => {
+						submit();
+
+						setSelected("");
+					}}
 				>
 					{">"}
 				</button>
 			</div>
-			{data.length > 0 && (isFocused || isHovered) && (
-				<div
-					className="mx-auto flex max-h-72 max-w-[20rem] flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
-					onMouseEnter={() => setIsHovered(true)}
-					onMouseLeave={() => setIsHovered(false)}
-				>
-					{data.map((item) => (
-						<button
-							key={item.Name}
-							type="button"
-							className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
-							onClick={() => {
-								setSelected(item.Name);
-								setData([]);
-							}}
-						>
-							<Preview item={item} />
-						</button>
-					))}
-				</div>
-			)}
+			<div className="relative">
+				{data.length > 0 && (isFocused || isHovered) && (
+					<div
+						className="absolute inset-x-0 top-0 z-10 mx-auto flex max-h-72 w-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
+						onMouseEnter={() => setIsHovered(true)}
+						onMouseLeave={() => setIsHovered(false)}
+					>
+						{data.map((item) => (
+							<button
+								key={item.Name}
+								type="button"
+								className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
+								onClick={() => {
+									setSelected(item.Name);
+									setData([]);
+								}}
+							>
+								<Preview item={item} />
+							</button>
+						))}
+					</div>
+				)}
+			</div>
 		</>
 	);
 }
