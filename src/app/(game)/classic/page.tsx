@@ -1,5 +1,4 @@
 import { ClassicGame } from "@/components/games/Classic";
-import { getDeterministicRandom } from "@/lib/game";
 import { loadGods } from "@/lib/smiteApi";
 
 export default async function ClassicPage() {

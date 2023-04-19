@@ -1,7 +1,9 @@
+import { ImArrowDown, ImArrowUp } from "react-icons/im";
+
 import { God } from "@/lib/smiteApi";
 import { cn } from "@/lib/utils";
 
-import { IconContainer } from "./IconContainer";
+import { ImageContainer } from "./IconContainer";
 
 export type GodDisplayProps = {
 	god: God;
@@ -53,7 +55,7 @@ function TextContainer({
 			className={cn(
 				bgColor,
 				isSmallText && "text-xs",
-				"flex h-20 w-20 items-center justify-center border border-accent backdrop-blur",
+				"relative flex h-20 w-20 items-center justify-center border border-accent backdrop-blur",
 			)}
 		>
 			<p>{children}</p>
@@ -71,10 +73,11 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 
 	return (
 		<div className="flex w-max flex-row justify-center gap-2 text-sm">
-			<IconContainer
+			<ImageContainer
 				src={god.godIcon_URL}
 				alt={`${god.Name} icon`}
-				size={80 - 2}
+				width={80 - 2}
+				height={80 - 2}
 			/>
 			<TextContainer correct={god.Gender === actualGod.Gender}>
 				{god.Gender}
@@ -95,6 +98,18 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 			</TextContainer>
 			<TextContainer correct={god.ReleaseYear === actualGod.ReleaseYear}>
 				{god.ReleaseYear}
+				<ImArrowUp
+					className={cn(
+						"absolute left-[2px] top-[2px] -z-10 h-[calc(5rem-6px)] w-[calc(5rem-6px)] text-red-600/20",
+						!(god.ReleaseYear < actualGod.ReleaseYear) && "hidden",
+					)}
+				/>
+				<ImArrowDown
+					className={cn(
+						"absolute left-[2px] top-[2px] -z-10 h-[calc(5rem-6px)] w-[calc(5rem-6px)] text-red-600/20",
+						!(god.ReleaseYear > actualGod.ReleaseYear) && "hidden",
+					)}
+				/>
 			</TextContainer>
 		</div>
 	);

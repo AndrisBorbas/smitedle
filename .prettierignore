@@ -39,7 +39,8 @@ public/workbox-*.js
 
 *.tsbuildinfo
 
-public/*.js
-.github/
+/hirez/
+
 /public/data/*
-/hirez/*
+
+pnpm-lock.yaml

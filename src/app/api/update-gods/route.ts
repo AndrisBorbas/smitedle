@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getGods, saveGods, saveRawGods, trimGods } from "@/lib/smiteApi";
+import { dlog } from "@/lib/utils";
 
 export async function GET() {
 	const gods = await getGods();
@@ -9,7 +10,7 @@ export async function GET() {
 	const goodGods = trimGods(gods);
 	saveGods(goodGods);
 
-	console.log("Gods updated");
+	dlog("Gods updated");
 
 	return NextResponse.json(goodGods);
 }

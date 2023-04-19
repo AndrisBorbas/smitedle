@@ -83,6 +83,7 @@ export async function getGods() {
 	return gods;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function saveRawGods(gods: any) {
 	fs.writeFile(
 		"./public/data/generated/rawGods.json",
@@ -111,6 +112,7 @@ export async function saveGods(gods: HirezGod[]) {
 	);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function trimGods(gods: any[]) {
 	gods.forEach((god) => {
 		Object.keys(god).forEach(

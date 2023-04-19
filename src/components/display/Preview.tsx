@@ -1,6 +1,6 @@
 import { God } from "@/lib/smiteApi";
 
-import { IconContainer } from "./IconContainer";
+import { ImageContainer } from "./IconContainer";
 
 export type PreviewProps = {
 	item: God;
@@ -9,10 +9,11 @@ export type PreviewProps = {
 export function Preview({ item }: PreviewProps) {
 	return (
 		<div className="flex flex-row items-center gap-4">
-			<IconContainer
+			<ImageContainer
 				src={item.godIcon_URL}
 				alt={`${item.Name} icon`}
-				size={48}
+				width={48}
+				height={48}
 			/>
 			<p>{item.Name}</p>
 		</div>

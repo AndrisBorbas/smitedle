@@ -8,15 +8,17 @@ import seedrandom from "seedrandom";
  * @param date The date to use for the random number generation, should be the current date
  */
 export function getDeterministicRandom(date: Date) {
-	date.setHours(date.getHours() + 2);
-	date.setMinutes(date.getMinutes() + 3);
+	// Testing
+	// date.setHours(date.getHours() + 2);
+	// date.setMinutes(date.getMinutes() + 0);
 
 	const timeZone = "Europe/Budapest";
 	date.setHours(date.getHours() + 6);
 	date.setMinutes(date.getMinutes());
-	const currentDate = date.toLocaleDateString("hu-HU", { timeZone });
-	const currentTime = date.toLocaleString("hu-HU", { timeZone });
-	console.log(currentTime);
+	const currentDate = date.toLocaleDateString("hu-HU", {
+		timeZone,
+		calendar: "gregory",
+	});
 
 	return seedrandom(currentDate);
 }

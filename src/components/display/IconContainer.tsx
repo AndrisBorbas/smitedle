@@ -4,13 +4,19 @@ import { cn } from "@/lib/utils";
 
 import styles from "./IconContainer.module.scss";
 
-export type IconContainerProps = {
+export type ImageContainerProps = {
 	src: string;
 	alt: string;
-	size?: number;
+	width?: number;
+	height?: number;
 };
 
-export function IconContainer({ src, alt, size = 64 }: IconContainerProps) {
+export function ImageContainer({
+	src,
+	alt,
+	width = 64,
+	height = 64,
+}: ImageContainerProps) {
 	return (
 		<div
 			className={cn(
@@ -19,7 +25,7 @@ export function IconContainer({ src, alt, size = 64 }: IconContainerProps) {
 				"after:shadow-inner-xl relative border border-accent",
 			)}
 		>
-			<Image src={src} alt={alt} width={size} height={size} unoptimized />
+			<Image src={src} alt={alt} width={width} height={height} unoptimized />
 		</div>
 	);
 }

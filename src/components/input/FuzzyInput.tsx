@@ -3,12 +3,14 @@
 import { filter as fuzzyFilter, sort as fuzzySort } from "fuzzyjs";
 import { useState } from "react";
 
+import { useBool } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
 
 import { Preview } from "../display/Preview";
 
 export type FuzzyInputProps = {
 	initialData: Gods;
+	filteredData: Gods;
 	selectionProperty?: "Name";
 	selected: string;
 	setSelected: (value: string) => void;
@@ -17,14 +19,15 @@ export type FuzzyInputProps = {
 
 export function FuzzyInput({
 	initialData,
+	filteredData,
 	selectionProperty = "Name",
 	selected,
 	setSelected,
 	submit,
 }: FuzzyInputProps) {
 	const [data, setData] = useState<Gods>([]);
-	const [isFocused, setIsFocused] = useState(false);
-	const [isHovered, setIsHovered] = useState(false);
+	const [isFocused, setIsFocused] = useBool(false);
+	const [isHovered, setIsHovered] = useBool(false);
 
 	function searchItem(query: string) {
 		if (!query) {
@@ -32,9 +35,11 @@ export function FuzzyInput({
 			return;
 		}
 
-		const filtered = initialData.filter(
-			fuzzyFilter(query, { iterator: (item) => item[selectionProperty] }),
-		);
+		const filtered = initialData
+			.filter((item) => !filteredData.includes(item))
+			.filter(
+				fuzzyFilter(query, { iterator: (item) => item[selectionProperty] }),
+			);
 		const result = filtered
 			.sort(fuzzySort(query, { iterator: (item) => item[selectionProperty] }))
 			.slice(0, 6);
@@ -57,8 +62,8 @@ export function FuzzyInput({
 						setSelected(e.target.value);
 						searchItem(e.target.value);
 					}}
-					onFocus={() => setIsFocused(true)}
-					onBlur={() => setIsFocused(false)}
+					onFocus={() => setIsFocused.setTrue()}
+					onBlur={() => setIsFocused.setFalse()}
 					value={selected}
 				/>
 
@@ -78,8 +83,11 @@ export function FuzzyInput({
 				{data.length > 0 && (isFocused || isHovered) && (
 					<div
 						className="absolute inset-x-0 top-0 z-10 mx-auto flex max-h-72 w-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
-						onMouseEnter={() => setIsHovered(true)}
-						onMouseLeave={() => setIsHovered(false)}
+						onMouseEnter={() => setIsHovered.setTrue()}
+						onMouseLeave={() => setIsHovered.setFalse()}
+						onMouseDown={() => setIsHovered.setTrue()}
+						role="listbox"
+						tabIndex={0}
 					>
 						{data.map((item) => (
 							<button
