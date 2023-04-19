@@ -22,3 +22,27 @@ export function getDeterministicRandom(date: Date) {
 
 	return seedrandom(currentDate);
 }
+
+export function timeRemaining() {
+	const now = new Date();
+	const targetDate = new Date("2021-09-01T16:00:00.000Z");
+	targetDate.setFullYear(now.getFullYear());
+	targetDate.setMonth(now.getMonth());
+	targetDate.setDate(now.getDate() + 1);
+	const targetDateInTimezone = new Date(
+		targetDate.toLocaleString(undefined, { timeZone: "Europe/Budapest" }),
+	);
+	const timeDifference = targetDateInTimezone.getTime() - now.getTime();
+
+	let secondsRemaining = Math.floor(timeDifference / 1000);
+	let minutesRemaining = Math.floor(secondsRemaining / 60);
+	let hoursRemaining = Math.floor(minutesRemaining / 60);
+
+	hoursRemaining %= 24;
+	minutesRemaining %= 60;
+	secondsRemaining %= 60;
+
+	return `${hoursRemaining}:${`0${minutesRemaining}`.slice(
+		-2,
+	)}:${`0${secondsRemaining}`.slice(-2)}`;
+}

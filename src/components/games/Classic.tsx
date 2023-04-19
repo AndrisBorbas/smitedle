@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { getDeterministicRandom } from "@/lib/game";
+import { getDeterministicRandom, timeRemaining } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
 import { cn, dlog } from "@/lib/utils";
@@ -123,6 +123,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 								/>
 							</>
 						)}
+					</div>
+					<div className="mt-8">
+						{win && <h5>Next god in: {timeRemaining()}</h5>}
 					</div>
 				</>
 			)}
