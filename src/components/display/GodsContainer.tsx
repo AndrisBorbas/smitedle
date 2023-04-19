@@ -1,10 +1,10 @@
-import { HirezGod, HirezGods } from "@/lib/smiteApi";
+import { God, Gods } from "@/lib/smiteApi";
 
 import { GodDisplay } from "./GodDisplay";
 
 export type GodsContainerProps = {
-	gods: HirezGods;
-	actualGod: HirezGod;
+	gods: Gods;
+	actualGod: God;
 };
 
 function HeaderContainer({ children }: { children: React.ReactNode }) {

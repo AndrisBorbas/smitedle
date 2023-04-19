@@ -1,10 +1,9 @@
 import { Smite } from "@joshmiquel/hirez";
 import fs from "fs";
-import path from "path";
 
 import { dlog } from "./utils";
 
-export const validKeys = [
+const validKeys = [
 	"Ability1",
 	"Ability2",
 	"Ability3",
@@ -33,7 +32,7 @@ export const validKeys = [
 	"id",
 ];
 
-export type HirezGod = {
+type HirezGod = {
 	Ability1: string;
 	Ability2: string;
 	Ability3: string;
@@ -62,7 +61,15 @@ export type HirezGod = {
 	id: number;
 };
 
-export type HirezGods = HirezGod[];
+type GodExtraInfo = {
+	Name: string;
+	Gender: string;
+	Position: string;
+	ReleaseYear: number;
+};
+
+export type God = HirezGod & GodExtraInfo;
+export type Gods = God[];
 
 export const smiteApiDevId = parseInt(process.env.SMITE_API_DEV_ID ?? "0", 10);
 export const smiteApiAuthKey = process.env.SMITE_API_AUTH_KEY ?? "noKey";
@@ -78,7 +85,7 @@ export async function getGods() {
 
 export async function saveRawGods(gods: any) {
 	fs.writeFile(
-		"public/data/generated/rawGods.json",
+		"./public/data/generated/rawGods.json",
 		JSON.stringify(gods),
 		(err) => {
 			if (err) {
@@ -90,9 +97,9 @@ export async function saveRawGods(gods: any) {
 	);
 }
 
-export async function saveGods(gods: HirezGods) {
+export async function saveGods(gods: HirezGod[]) {
 	fs.writeFile(
-		"public/data/generated/gods.json",
+		"./public/data/generated/gods.json",
 		JSON.stringify(gods),
 		(err) => {
 			if (err) {
@@ -112,11 +119,60 @@ export function trimGods(gods: any[]) {
 		);
 	});
 
-	return gods as HirezGods;
+	return gods as HirezGod[];
 }
 
-export async function loadGeneratedGods() {
-	const p = path.join("public", "data", "generated", "gods.json");
-	const gods = await fs.readFileSync(`./${p}`, "utf-8");
-	return JSON.parse(gods) as HirezGods;
+async function loadGeneratedGods() {
+	const gods = await fs.readFileSync(
+		`./public/data/generated/gods.json`,
+		"utf-8",
+	);
+	return JSON.parse(gods) as HirezGod[];
+}
+
+async function loadGodsExtraInfo() {
+	const gods = await fs.readFileSync(
+		`./public/data/godsExtraInfo.json`,
+		"utf-8",
+	);
+	return JSON.parse(gods) as GodExtraInfo[];
+}
+
+function combineGods(gods: HirezGod[], godsExtraInfo: GodExtraInfo[]): Gods {
+	const combined = gods.map((god) => {
+		const extraInfo = godsExtraInfo.find((info) => info.Name === god.Name);
+		if (!extraInfo) {
+			throw new Error(`No extra info for ${god.Name}`);
+		}
+		const combinedGod = { ...god, ...extraInfo };
+		return combinedGod;
+	});
+	return combined;
+}
+
+export async function loadGods() {
+	const [gods, godsExtraInfo] = await Promise.all([
+		loadGeneratedGods(),
+		loadGodsExtraInfo(),
+	]);
+
+	return combineGods(gods, godsExtraInfo);
+}
+
+export async function exportGods(gods: HirezGod[]) {
+	const ex = gods.map((god) => {
+		const asd = { Name: god.Name, Gender: 0, Position: 0, ReleaseYear: 0 };
+		return asd;
+	});
+	fs.writeFile(
+		"./public/data/generated/export.json",
+		JSON.stringify(ex),
+		(err) => {
+			if (err) {
+				dlog(err);
+				return;
+			}
+			dlog("Gods exported");
+		},
+	);
 }

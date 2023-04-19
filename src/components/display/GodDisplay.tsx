@@ -1,11 +1,11 @@
-import { HirezGod } from "@/lib/smiteApi";
+import { God } from "@/lib/smiteApi";
 import { cn } from "@/lib/utils";
 
 import { IconContainer } from "./IconContainer";
 
 export type GodDisplayProps = {
-	god: HirezGod;
-	actualGod: HirezGod;
+	god: God;
+	actualGod: God;
 };
 
 function splitTypes(roles: string) {
@@ -66,6 +66,8 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 	const [actualRange, actualDamage] = splitTypes(actualGod.Type);
 	const pros = god.Pros.split(", ");
 	const actualPros = actualGod.Pros.split(", ");
+	const pos = god.Position.split(", ");
+	const actualPos = actualGod.Position.split(", ");
 
 	return (
 		<div className="flex w-max flex-row justify-center gap-2 text-sm">
@@ -74,11 +76,15 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 				alt={`${god.Name} icon`}
 				size={80 - 2}
 			/>
-			<TextContainer correct>gender</TextContainer>
+			<TextContainer correct={god.Gender === actualGod.Gender}>
+				{god.Gender}
+			</TextContainer>
 			<TextContainer correct={god.Roles === actualGod.Roles}>
 				{god.Roles}
 			</TextContainer>
-			<TextContainer correct>pos</TextContainer>
+			<TextContainer correct={checkSet(pos, actualPos)}>
+				{pos.join(", ")}
+			</TextContainer>
 			<TextContainer correct={range === actualRange}>{range}</TextContainer>
 			<TextContainer correct={damage === actualDamage}>{damage}</TextContainer>
 			<TextContainer isSmallText correct={checkSet(pros, actualPros)}>
@@ -87,7 +93,9 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 			<TextContainer correct={god.Pantheon === actualGod.Pantheon}>
 				{god.Pantheon}
 			</TextContainer>
-			<TextContainer>{2024}</TextContainer>
+			<TextContainer correct={god.ReleaseYear === actualGod.ReleaseYear}>
+				{god.ReleaseYear}
+			</TextContainer>
 		</div>
 	);
 }

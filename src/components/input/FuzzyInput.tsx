@@ -3,12 +3,12 @@
 import { filter as fuzzyFilter, sort as fuzzySort } from "fuzzyjs";
 import { useState } from "react";
 
-import { HirezGods } from "@/lib/smiteApi";
+import { Gods } from "@/lib/smiteApi";
 
 import { Preview } from "../display/Preview";
 
 export type FuzzyInputProps = {
-	initialData: HirezGods;
+	initialData: Gods;
 	selectionProperty?: "Name";
 	selected: string;
 	setSelected: (value: string) => void;
@@ -22,7 +22,7 @@ export function FuzzyInput({
 	setSelected,
 	submit,
 }: FuzzyInputProps) {
-	const [data, setData] = useState<HirezGods>([]);
+	const [data, setData] = useState<Gods>([]);
 	const [isFocused, setIsFocused] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 

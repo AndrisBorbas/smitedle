@@ -1,12 +1,9 @@
-import Image from "next/image";
-
-import { HirezGod } from "@/lib/smiteApi";
-import { cn } from "@/lib/utils";
+import { God } from "@/lib/smiteApi";
 
 import { IconContainer } from "./IconContainer";
 
 export type PreviewProps = {
-	item: HirezGod;
+	item: God;
 };
 
 export function Preview({ item }: PreviewProps) {

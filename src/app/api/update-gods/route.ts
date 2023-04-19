@@ -9,5 +9,7 @@ export async function GET() {
 	const goodGods = trimGods(gods);
 	saveGods(goodGods);
 
+	console.log("Gods updated");
+
 	return NextResponse.json(goodGods);
 }

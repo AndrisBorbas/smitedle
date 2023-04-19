@@ -2,19 +2,19 @@
 
 import { useState } from "react";
 
-import { HirezGod, HirezGods } from "@/lib/smiteApi";
+import { God, Gods } from "@/lib/smiteApi";
 
 import { GodsContainer } from "../display/GodsContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
 
 export type ClassicGameProps = {
-	gods: HirezGods;
-	actualGod: HirezGod;
+	gods: Gods;
+	actualGod: God;
 };
 
 export function ClassicGame({ gods, actualGod }: ClassicGameProps) {
 	const [selected, setSelected] = useState("");
-	const [selectedGods, setSelectedGods] = useState<HirezGods>([]);
+	const [selectedGods, setSelectedGods] = useState<Gods>([]);
 
 	console.log(actualGod.Name);
 

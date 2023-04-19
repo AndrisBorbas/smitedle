@@ -2,13 +2,732 @@
 	{
 		"Name": "Achilles",
 		"Gender": "Male",
-		"Position": "Solo",
-		"ReleaseYear": 2024
+		"Position": "Solo, Support",
+		"ReleaseYear": 2018
 	},
 	{
 		"Name": "Agni",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Ah Muzen Cab",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Ah Puch",
+		"Gender": "Male",
+		"Position": "Solo, Mid",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Amaterasu",
+		"Gender": "Female",
+		"Position": "Solo",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Anhur",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Anubis",
 		"Gender": "Male",
 		"Position": "Mid",
-		"ReleaseYear": 2024
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Ao Kuang",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Aphrodite",
+		"Gender": "Female",
+		"Position": "Support, Solo, Mid",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Apollo",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Arachne",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Ares",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Artemis",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Artio",
+		"Gender": "Female",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Athena",
+		"Gender": "Female",
+		"Position": "Support",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Atlas",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Awilix",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Baba Yaga",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2020
+	},
+	{
+		"Name": "Bacchus",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Bakasura",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Baron Samedi",
+		"Gender": "Male",
+		"Position": "Support, Solo, Mid",
+		"ReleaseYear": 2018
+	},
+	{
+		"Name": "Bastet",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Bellona",
+		"Gender": "Female",
+		"Position": "Solo",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Cabrakan",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Camazotz",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Cerberus",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2018
+	},
+	{
+		"Name": "Cernunnos",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Chaac",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Chang'e",
+		"Gender": "Female",
+		"Position": "Mid, Solo",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Charybdis",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Chernobog",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2018
+	},
+	{
+		"Name": "Chiron",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Chronos",
+		"Gender": "Male",
+		"Position": "Mid, Carry, Solo",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Cliodhna",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Cthulhu",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2020
+	},
+	{
+		"Name": "Cu Chulainn",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Cupid",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Da Ji",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Danzaburou",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2020
+	},
+	{
+		"Name": "Discordia",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Erlang Shen",
+		"Gender": "Male",
+		"Position": "Solo, Jungle",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Eset",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Fafnir",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Fenrir",
+		"Gender": "Male",
+		"Position": "Jungle, Support",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Freya",
+		"Gender": "Female",
+		"Position": "Carry, Mid",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Ganesha",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Geb",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Gilgamesh",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Guan Yu",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Hachiman",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Hades",
+		"Gender": "Male",
+		"Position": "Solo, Mid",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "He Bo",
+		"Gender": "Male",
+		"Position": "Mid, Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Heimdallr",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Hel",
+		"Gender": "Female",
+		"Position": "Solo, Mid",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Hera",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2018
+	},
+	{
+		"Name": "Hercules",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Horus",
+		"Gender": "Male",
+		"Position": "Support, Solo",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Hou Yi",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Hun Batz",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Ishtar",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2022
+	},
+	{
+		"Name": "Izanami",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Ix Chel",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2023
+	},
+	{ "Name": "Janus", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2014 },
+	{
+		"Name": "Jing Wei",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Jormungandr",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Kali",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Khepri",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "King Arthur",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Kukulkan",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Kumbhakarna",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Kuzenbo",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Lancelot",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2022
+	},
+	{
+		"Name": "Loki",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Martichoras",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2023
+	},
+	{
+		"Name": "Maui",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2022
+	},
+	{
+		"Name": "Medusa",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Mercury",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Merlin",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Morgan Le Fay",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Mulan",
+		"Gender": "Female",
+		"Position": "Solo",
+		"ReleaseYear": 2020
+	},
+	{
+		"Name": "Ne Zha",
+		"Gender": "Male",
+		"Position": "Jungle, Support",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Neith",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Nemesis",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Nike",
+		"Gender": "Female",
+		"Position": "Solo",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Nox",
+		"Gender": "Female",
+		"Position": "Mid, Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Nu Wa",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Odin",
+		"Gender": "Male",
+		"Position": "Solo, Support",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Olorun",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Osiris",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Pele",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2018
+	},
+	{
+		"Name": "Persephone",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Poseidon",
+		"Gender": "Male",
+		"Position": "Mid, Jungle",
+		"ReleaseYear": 2013
+	},
+	{ "Name": "Ra", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2012 },
+	{
+		"Name": "Raijin",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Rama",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Ratatoskr",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Ravana",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Scylla",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Serqet",
+		"Gender": "Female",
+		"Position": "Jungle, Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Set",
+		"Gender": "Male",
+		"Position": "Jungle, Solo",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Shiva",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2022
+	},
+	{
+		"Name": "Skadi",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Sobek",
+		"Gender": "Male",
+		"Position": "Support, Solo",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Sol",
+		"Gender": "Female",
+		"Position": "Carry, Mid",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Sun Wukong",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Surtr",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2023
+	},
+	{
+		"Name": "Susano",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Sylvanus",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Terra",
+		"Gender": "Female",
+		"Position": "Support, Solo",
+		"ReleaseYear": 2016
+	},
+	{
+		"Name": "Thanatos",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "The Morrigan",
+		"Gender": "Female",
+		"Position": "Mid, Jungle",
+		"ReleaseYear": 2017
+	},
+	{
+		"Name": "Thor",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2012
+	},
+	{ "Name": "Thoth", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2016 },
+	{
+		"Name": "Tiamat",
+		"Gender": "Female",
+		"Position": "Mid, Solo",
+		"ReleaseYear": 2021
+	},
+	{
+		"Name": "Tsukuyomi",
+		"Gender": "Male",
+		"Position": "Jungle",
+		"ReleaseYear": 2020
+	},
+	{ "Name": "Tyr", "Gender": "Male", "Position": "Solo", "ReleaseYear": 2013 },
+	{
+		"Name": "Ullr",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2014
+	},
+	{
+		"Name": "Vamana",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Vulcan",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Xbalanque",
+		"Gender": "Male",
+		"Position": "Carry",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Xing Tian",
+		"Gender": "Male",
+		"Position": "Support, Solo",
+		"ReleaseYear": 2015
+	},
+	{
+		"Name": "Yemoja",
+		"Gender": "Female",
+		"Position": "Support",
+		"ReleaseYear": 2019
+	},
+	{
+		"Name": "Ymir",
+		"Gender": "Male",
+		"Position": "Support, Solo, Jungle",
+		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Yu Huang",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2022
+	},
+	{ "Name": "Zeus", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2012 },
+	{
+		"Name": "Zhong Kui",
+		"Gender": "Male",
+		"Position": "Mid, Solo",
+		"ReleaseYear": 2013
 	}
 ]
