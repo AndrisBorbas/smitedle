@@ -2,19 +2,22 @@
 
 import { useState } from "react";
 
-import { God, Gods } from "@/lib/smiteApi";
+import { getDeterministicRandom } from "@/lib/game";
+import { Gods } from "@/lib/smiteApi";
 
 import { GodsContainer } from "../display/GodsContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
 
 export type ClassicGameProps = {
 	gods: Gods;
-	actualGod: God;
 };
 
-export function ClassicGame({ gods, actualGod }: ClassicGameProps) {
+export function ClassicGame({ gods }: ClassicGameProps) {
 	const [selected, setSelected] = useState("");
 	const [selectedGods, setSelectedGods] = useState<Gods>([]);
+
+	const random = getDeterministicRandom(new Date());
+	const actualGod = gods[Math.floor(random() * gods.length)];
 
 	console.log(actualGod.Name);
 

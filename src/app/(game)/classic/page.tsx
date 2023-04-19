@@ -4,8 +4,6 @@ import { loadGods } from "@/lib/smiteApi";
 
 export default async function ClassicPage() {
 	const gods = await loadGods();
-	const random = getDeterministicRandom(new Date());
-	const actualGod = gods[Math.floor(random() * gods.length)];
 	// console.log(actualGod.Name);
-	return <ClassicGame gods={gods} actualGod={actualGod} />;
+	return <ClassicGame gods={gods} />;
 }
