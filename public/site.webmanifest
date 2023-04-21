@@ -1,0 +1,10 @@
+{
+	"name": "Smitedle",
+	"short_name": "Smitedle",
+	"theme_color": "#85784a",
+	"background_color": "#020617",
+	"display": "standalone",
+	"orientation": "portrait",
+	"scope": "/",
+	"start_url": "/"
+}
