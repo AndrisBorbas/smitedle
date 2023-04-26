@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getDeterministicRandom, timeRemaining } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
+import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
 import { GodsContainer } from "../display/GodsContainer";
@@ -62,7 +63,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 	useEffect(() => {
 		if (win) {
 			winRef.current?.scrollIntoView({ behavior: "smooth" });
+			trackEvent("classic-win", { guesses }, "/classic");
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [win]);
 
 	// Set loaded after gods are loaded from local storage

@@ -24,38 +24,20 @@ export const getPayload = () => ({
 	url: `${location.pathname}${location.search}`,
 });
 
-export function trackView(referrer?: string, url?: string) {
-	if (process.env.NODE_ENV !== "production") {
-		dlog("trackView blocked: ", referrer, url);
-		return;
-	}
-	fetch("/api/utils/view", {
-		method: "POST",
-		body: JSON.stringify({
-			type: "pageview",
-			payload: assign(getPayload(), {
-				website: TRACKING_ID,
-				url,
-				referrer,
-			}),
-		}),
-	});
-}
-
 export function trackEvent(eventName: string, data: object, url?: string) {
 	if (process.env.NODE_ENV !== "production") {
-		dlog("trackEvent blocked: ", eventName, data, url);
+		dlog("trackEvent blocked: ", eventName, data, url, getPayload());
 		return;
 	}
-	fetch("/api/utils/event", {
+	fetch("/api/succ", {
 		method: "POST",
 		body: JSON.stringify({
 			type: "event",
 			payload: assign(getPayload(), {
 				website: TRACKING_ID,
 				url,
-				event_name: eventName,
-				event_data: data,
+				name: eventName,
+				data,
 			}),
 		}),
 	});
