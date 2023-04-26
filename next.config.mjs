@@ -5,7 +5,6 @@ import withPWA from "next-pwa";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	swcMinify: true,
 	images: {
 		deviceSizes: [375],
 		imageSizes: [64, 750],
