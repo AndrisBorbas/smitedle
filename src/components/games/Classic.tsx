@@ -63,7 +63,6 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 	useEffect(() => {
 		if (win) {
 			winRef.current?.scrollIntoView({ behavior: "smooth" });
-			trackEvent("classic-win", { guesses }, "/classic");
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [win]);
@@ -100,8 +99,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							}
 							setGuesses(guesses + 1);
 							setSelectedGods([god, ...selectedGods]);
-							if (god.Name === actualGod.Name) {
+							if (god.Name === actualGod.Name && !win) {
 								setWin(true);
+								trackEvent("classic-win", { guesses }, "/classic");
 							}
 							return true;
 						}}

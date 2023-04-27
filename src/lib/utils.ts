@@ -18,10 +18,16 @@ export function absoluteUrl(path: string) {
 	return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function dlog(...args: any) {
+export function dlog(...args: unknown[]) {
 	if (process.env.NODE_ENV !== "production") {
 		// eslint-disable-next-line no-console
 		console.log(...args);
+	}
+}
+
+export function derr(...args: unknown[]) {
+	if (process.env.NODE_ENV !== "production") {
+		// eslint-disable-next-line no-console
+		console.error(...args);
 	}
 }
