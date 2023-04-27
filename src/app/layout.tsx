@@ -8,7 +8,6 @@ import { absoluteUrl, cn } from "@/lib/utils";
 
 type RootLayoutProps = {
 	children: React.ReactNode;
-	className?: string;
 };
 
 export const metadata = {
@@ -65,7 +64,7 @@ export const metadata = {
 	manifest: `${siteConfig.url}/site.webmanifest`,
 };
 
-export default function RootLayout({ children, className }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" className="bg-slate-950 font-sans text-white antialiased">
 			<head />
@@ -87,7 +86,7 @@ export default function RootLayout({ children, className }: RootLayoutProps) {
 					<div className="bg-black/25 text-white">Under construction</div>
 				</div>
 
-				<main className={cn("my-8 sm:my-16", className)}>{children}</main>
+				<main className={cn("my-8 sm:my-16")}>{children}</main>
 
 				<Footer buildDate={Date.now()} />
 			</body>

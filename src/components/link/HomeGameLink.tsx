@@ -1,4 +1,4 @@
-import { TrackingLink } from "./TrackingLink";
+import Link from "next/link";
 
 export type HomeGameLinkProps = {
 	name: string;
@@ -14,14 +14,13 @@ export function HomeGameLink({
 	onClick,
 }: HomeGameLinkProps) {
 	return (
-		<TrackingLink
+		<Link
 			href={`/${name.toLowerCase()}`}
-			eventName={`home-${name.toLowerCase()}`}
 			className="block w-80 rounded border border-accent bg-white/5 p-4 text-left backdrop-blur"
 			onClick={onClick}
 		>
 			<h4 className="mb-1 text-lg">{name}</h4>
 			<p className="text-sm">{description}</p>
-		</TrackingLink>
+		</Link>
 	);
 }

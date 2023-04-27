@@ -1,4 +1,4 @@
-import { TrackingLink } from "@/components/link/TrackingLink";
+import Link from "next/link";
 
 type IndexLayoutProps = {
 	children: React.ReactNode;
@@ -7,13 +7,9 @@ type IndexLayoutProps = {
 export default function IndexLayout({ children }: IndexLayoutProps) {
 	return (
 		<section className="mx-auto text-center">
-			<TrackingLink
-				className="mx-auto mb-4 block w-fit p-4"
-				href="/"
-				eventName="home"
-			>
+			<Link className="mx-auto mb-4 block w-fit p-4" href="/">
 				<h1 className="text-6xl">Smitedle</h1>
-			</TrackingLink>
+			</Link>
 			{children}
 		</section>
 	);
