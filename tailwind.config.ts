@@ -8,6 +8,7 @@ export default {
 		extend: {
 			transitionTimingFunction: {
 				DEFAULT: defaultTheme.transitionTimingFunction.out,
+				slide: "cubic-bezier(.19,1,.22,1)",
 			},
 			colors: {
 				accent: {

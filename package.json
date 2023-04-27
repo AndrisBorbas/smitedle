@@ -1,7 +1,7 @@
 {
 	"name": "smitedle",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"packageManager": "pnpm@8.3.1",
 	"scripts": {
 		"build": "next build",
@@ -28,7 +28,7 @@
 		"clsx": "^1.2.1",
 		"framer-motion": "^10.12.4",
 		"fuzzyjs": "^5.0.1",
-		"next": "13.3.2-canary.7",
+		"next": "13.3.2-canary.11",
 		"next-compose-plugins": "^2.2.1",
 		"next-pwa": "5.6.0",
 		"plaiceholder": "^2.5.0",
@@ -39,7 +39,7 @@
 		"react-icons": "^4.8.0",
 		"sass": "^1.62.1",
 		"seedrandom": "^3.0.5",
-		"sharp": "^0.32.0",
+		"sharp": "^0.32.1",
 		"swr": "^2.1.5",
 		"tailwind-merge": "^1.12.0",
 		"tailwindcss": "^3.3.2"

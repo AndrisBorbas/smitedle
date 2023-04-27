@@ -24,6 +24,11 @@
 }
 
 @layer components {
+	.fancyButton {
+		@apply relative overflow-hidden;
+		@apply after:pointer-events-none after:absolute after:-left-20 after:-top-4 after:h-[140%] after:w-[48px] after:rotate-12 after:transform-gpu after:bg-white/40 after:transition-all after:duration-700 after:ease-slide after:content-[''];
+		@apply hover:after:left-[calc(110%+48px)];
+	}
 }
 
 @layer utilities {
