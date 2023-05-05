@@ -19,6 +19,7 @@ export const metadata = {
 	keywords: [
 		"Smitedle",
 		"Smite",
+		"Smite Wordle",
 		"Hi-Rez Studios",
 		"Hirez",
 		"Wordle",
