@@ -28,7 +28,7 @@
 		"clsx": "^1.2.1",
 		"framer-motion": "^10.12.4",
 		"fuzzyjs": "^5.0.1",
-		"next": "13.3.2-canary.11",
+		"next": "13.4.1-canary.2",
 		"next-compose-plugins": "^2.2.1",
 		"next-pwa": "5.6.0",
 		"plaiceholder": "^2.5.0",
