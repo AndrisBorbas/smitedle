@@ -64,7 +64,6 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 		if (win) {
 			winRef.current?.scrollIntoView({ behavior: "smooth" });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [win]);
 
 	// Set loaded after gods are loaded from local storage
@@ -101,7 +100,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							setSelectedGods([god, ...selectedGods]);
 							if (god.Name === actualGod.Name && !win) {
 								setWin(true);
-								trackEvent("classic-win", { guesses }, "/classic");
+								trackEvent("win-classic", { guesses }, "/classic");
 							}
 							return true;
 						}}
