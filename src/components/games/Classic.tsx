@@ -9,7 +9,7 @@ import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
 import { GodsContainer } from "../display/GodsContainer";
-import { ImageContainer } from "../display/IconContainer";
+import { IconContainer } from "../display/IconContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
 
 export type ClassicGameProps = {
@@ -91,6 +91,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 						filteredData={selectedGods}
 						selected={selected}
 						setSelected={setSelected}
+						disabled={win}
 						submit={() => {
 							const god = gods.find((g) => g.Name === selected);
 							if (!god || selectedGods.includes(god)) {
@@ -99,7 +100,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							setGuesses(guesses + 1);
 							setSelectedGods([god, ...selectedGods]);
 							if (god.Name === actualGod.Name && !win) {
-								setWin(true);
+								setTimeout(() => {
+									setWin(true);
+								}, 150 * 9 + 300);
 								trackEvent("win-classic", { guesses }, "/classic");
 							}
 							return true;
@@ -117,11 +120,12 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							<>
 								<h3 className="mb-4">You won! 🏆</h3>
 								<h4 className="mb-4">The god was: {actualGod.Name}</h4>
-								<ImageContainer
+								<IconContainer
 									src={actualGod.godCard_URL}
 									alt={`${actualGod.Name} thumbnail`}
 									width={180}
 									height={335}
+									anim
 								/>
 							</>
 						)}

@@ -1,9 +1,10 @@
+import { motion } from "framer-motion";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 
 import { God } from "@/lib/smiteApi";
 import { cn } from "@/lib/utils";
 
-import { ImageContainer } from "./IconContainer";
+import { appearAnim, IconContainer } from "./IconContainer";
 
 export type GodDisplayProps = {
 	god: God;
@@ -51,15 +52,17 @@ function TextContainer({
 	}
 
 	return (
-		<div
-			className={cn(
-				bgColor,
-				isSmallText && "text-xs",
-				"relative flex h-20 w-20 items-center justify-center border border-accent backdrop-blur",
-			)}
-		>
-			<p>{children}</p>
-		</div>
+		<motion.div variants={appearAnim} className="fancyAnim">
+			<div
+				className={cn(
+					bgColor,
+					isSmallText && "text-xs",
+					"relative flex h-20 w-20 items-center justify-center border border-accent backdrop-blur",
+				)}
+			>
+				<p>{children}</p>
+			</div>
+		</motion.div>
 	);
 }
 
@@ -72,12 +75,20 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 	const actualPos = actualGod.Position.split(", ");
 
 	return (
-		<div className="flex w-max flex-row justify-center gap-2 text-sm">
-			<ImageContainer
+		<motion.div
+			transition={{
+				staggerChildren: 0.15,
+			}}
+			initial="initial"
+			animate="show"
+			className="flex w-max flex-row justify-center gap-2 text-sm"
+		>
+			<IconContainer
 				src={god.godIcon_URL}
 				alt={`${god.Name} icon`}
 				width={80 - 2}
 				height={80 - 2}
+				anim
 			/>
 			<TextContainer correct={god.Gender === actualGod.Gender}>
 				{god.Gender}
@@ -111,6 +122,6 @@ export function GodDisplay({ god, actualGod }: GodDisplayProps) {
 					)}
 				/>
 			</TextContainer>
-		</div>
+		</motion.div>
 	);
 }

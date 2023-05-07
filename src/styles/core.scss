@@ -24,9 +24,33 @@
 }
 
 @layer components {
-	.fancyButton {
+	.fancyElement {
 		@apply relative overflow-hidden;
-		@apply after:pointer-events-none after:absolute after:-left-20 after:-top-4 after:h-[140%] after:w-[48px] after:rotate-12 after:transform-gpu after:bg-white/40 after:transition-all after:duration-700 after:ease-slide after:content-[''];
+		@apply after:pointer-events-none after:absolute after:-left-20 after:-top-4 after:h-[140%] after:w-[48px] after:rotate-12 after:transform-gpu after:bg-white/40 after:content-[''];
+	}
+
+	@keyframes slide-left {
+		0% {
+			left: -5rem;
+		}
+		100% {
+			left: calc(110% + 48px);
+		}
+	}
+
+	.fancyAnim {
+		@apply fancyElement;
+
+		&::after {
+			animation: slide-left 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+			animation-delay: 300ms;
+			animation-fill-mode: forwards;
+		}
+	}
+
+	.fancyButton {
+		@apply fancyElement;
+		@apply after:-left-20 after:transition-all after:duration-700 after:ease-slide;
 		@apply hover:after:left-[calc(110%+48px)];
 	}
 }

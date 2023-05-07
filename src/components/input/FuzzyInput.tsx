@@ -16,6 +16,7 @@ export type FuzzyInputProps = {
 	filteredData: Gods;
 	selectionProperty?: "Name";
 	selected: string;
+	disabled?: boolean;
 	setSelected: (value: string) => void;
 	submit: () => boolean;
 };
@@ -25,6 +26,7 @@ export function FuzzyInput({
 	filteredData,
 	selectionProperty = "Name",
 	selected,
+	disabled,
 	setSelected,
 	submit,
 }: FuzzyInputProps) {
@@ -59,7 +61,7 @@ export function FuzzyInput({
 		<>
 			<div className="mx-auto mb-2 flex max-w-[20rem] flex-row justify-center gap-2">
 				<input
-					className="w-full border-2 border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/20 focus:outline-none focus:ring-1 focus:ring-accent"
+					className="w-full border-2 border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/20 focus:outline-none focus:ring-1 focus:ring-accent disabled:cursor-not-allowed"
 					type="search"
 					placeholder="Type a gods name..."
 					onChange={(e) => {
@@ -69,6 +71,7 @@ export function FuzzyInput({
 					onFocus={() => setIsFocused.setTrue()}
 					onBlur={() => setIsFocused.setFalse()}
 					value={selected}
+					disabled={disabled}
 				/>
 
 				<div className="relative">
@@ -91,6 +94,7 @@ export function FuzzyInput({
 							"pointer-events-none absolute inset-x-0 -top-8 z-30 select-none text-center font-bold text-yellow-300",
 							showImmune ? "block" : "hidden",
 						)}
+						aria-hidden="true"
 						draggable={false}
 					>
 						*Immune*
