@@ -4,6 +4,10 @@ import { getGods, saveGods, saveRawGods, trimGods } from "@/lib/smiteApi";
 import { dlog } from "@/lib/utils";
 
 export async function GET() {
+	if (process.env.NODE_ENV !== "development") {
+		return NextResponse.redirect("/");
+	}
+
 	const gods = await getGods();
 
 	saveRawGods(gods);

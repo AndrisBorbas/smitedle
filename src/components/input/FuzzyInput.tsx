@@ -13,7 +13,7 @@ import styles from "./FuzzyInput.module.scss";
 
 export type FuzzyInputProps = {
 	initialData: Gods;
-	filteredData: Gods;
+	filteredData: number[];
 	selectionProperty?: "Name";
 	selected: string;
 	disabled?: boolean;
@@ -42,7 +42,7 @@ export function FuzzyInput({
 		}
 
 		const filtered = initialData
-			.filter((item) => !filteredData.includes(item))
+			.filter((item) => !filteredData.some((id) => id === item.id))
 			.filter(
 				fuzzyFilter(query, { iterator: (item) => item[selectionProperty] }),
 			);

@@ -27,8 +27,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 	const [guesses, setGuesses] = useState(0);
 
 	const [selected, setSelected] = useLocalStorage("classicSelectedValue", "");
-	const [selectedGods, setSelectedGods] = useLocalStorage<Gods>(
-		"classicSelectedGods",
+	const [selectedGods, setSelectedGods] = useState<Gods>([]);
+	const [selectedGodsIDs, setSelectedGodsIDs] = useLocalStorage<number[]>(
+		"classicSelectedGodsIDs",
 		[],
 	);
 
@@ -50,14 +51,21 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 		if (actualGodId !== -1 && actualGod.id !== actualGodId) {
 			window.localStorage.removeItem("classicSelectedValue");
 			setSelected("");
-			window.localStorage.removeItem("classicSelectedGods");
-			setSelectedGods([]);
+			window.localStorage.removeItem("classicSelectedGodsIDs");
+			setSelectedGodsIDs([]);
 			window.localStorage.removeItem("classicWin");
 			setWin(false);
 
 			setLoaded.setTrue();
 		}
-	}, [actualGodId, actualGod, setSelected, setSelectedGods, setWin, setLoaded]);
+	}, [
+		actualGodId,
+		actualGod,
+		setSelected,
+		setSelectedGodsIDs,
+		setWin,
+		setLoaded,
+	]);
 
 	// Scroll to win on win
 	useEffect(() => {
@@ -68,14 +76,18 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 
 	// Set loaded after gods are loaded from local storage
 	useEffect(() => {
-		if (selectedGods.length !== 0) {
+		if (!loaded && selectedGodsIDs.length !== 0) {
+			setSelectedGods(
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				selectedGodsIDs.map((id) => gods.find((g) => g.id === id)!),
+			);
 			setLoaded.setTrue();
 		}
-	}, [selectedGods, setLoaded]);
+	}, [gods, loaded, selectedGodsIDs, setLoaded]);
 
 	// Set loaded if no gods are selected
 	useEffect(() => {
-		const data = window.localStorage.getItem("classicSelectedGods");
+		const data = window.localStorage.getItem("classicSelectedGodsIDs");
 		if (data === null || data === "[]") {
 			setLoaded.setTrue();
 		}
@@ -88,7 +100,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 				<>
 					<FuzzyInput
 						initialData={gods}
-						filteredData={selectedGods}
+						filteredData={selectedGodsIDs}
 						selected={selected}
 						setSelected={setSelected}
 						disabled={win}
@@ -98,7 +110,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 								return false;
 							}
 							setGuesses(guesses + 1);
+							setSelectedGodsIDs([god.id, ...selectedGodsIDs]);
 							setSelectedGods([god, ...selectedGods]);
+
 							if (god.Name === actualGod.Name && !win) {
 								setTimeout(() => {
 									setWin(true);
