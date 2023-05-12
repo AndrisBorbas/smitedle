@@ -23,15 +23,19 @@ export function getDeterministicRandom(date: Date) {
 	return seedrandom(currentDate);
 }
 
-export function timeRemaining() {
-	const now = new Date();
+export function getTargetDate(now = new Date()) {
 	const targetDate = new Date("2021-09-01T16:00:00.000Z");
 	targetDate.setFullYear(now.getFullYear());
 	targetDate.setMonth(now.getMonth());
 	targetDate.setDate(now.getDate() + 1);
-	const targetDateInTimezone = new Date(
+	return new Date(
 		targetDate.toLocaleString(undefined, { timeZone: "Europe/Budapest" }),
 	);
+}
+
+export function timeRemaining() {
+	const now = new Date();
+	const targetDateInTimezone = getTargetDate(now);
 	const timeDifference = targetDateInTimezone.getTime() - now.getTime();
 
 	let secondsRemaining = Math.floor(timeDifference / 1000);

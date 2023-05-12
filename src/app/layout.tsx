@@ -1,5 +1,6 @@
 import "@/styles/globals.scss";
 
+import { Metadata } from "next";
 import Script from "next/script";
 
 import { Footer } from "@/components/layout/Footer";
@@ -10,9 +11,9 @@ type RootLayoutProps = {
 	children: React.ReactNode;
 };
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: {
-		default: siteConfig.name,
+		absolute: siteConfig.name,
 		template: `%s | ${siteConfig.name}`,
 	},
 	description: siteConfig.description,

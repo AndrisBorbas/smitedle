@@ -18,6 +18,12 @@ export default {
 			backgroundImage: {
 				smite: "url('/images/bg.webp')",
 			},
+			boxShadow: {
+				glow: "0 0 7px rgba(255, 255, 255, 0.5)",
+			},
+			dropShadow: {
+				glow: "0 0 7px rgba(255, 255, 255, 0.5)",
+			},
 			fontFamily: {},
 		},
 	},

@@ -30,11 +30,56 @@ function checkSet(a: string[], b: string[]) {
 	return ret;
 }
 
-type TextContainerProps = {
+type ContainerProps = {
 	children: React.ReactNode;
 	correct?: Correctness;
-	isSmallText?: boolean;
 };
+
+function SimpleContainer({ children, correct = false }: ContainerProps) {
+	let bgColor = "bg-red-600/25";
+
+	if (correct === "partial") {
+		bgColor = "bg-yellow-600/25";
+	} else if (correct) {
+		bgColor = "bg-green-600/25";
+	} else {
+		bgColor = "bg-red-600/25";
+	}
+
+	return (
+		<motion.div variants={appearAnim} className="fancyAnim w-max">
+			<div
+				className={cn(
+					bgColor,
+					"relative flex w-[20rem] flex-row items-center gap-4 border border-accent p-4 backdrop-blur",
+				)}
+			>
+				{children}
+			</div>
+		</motion.div>
+	);
+}
+
+export function SimpleGodDisplay({ god, actualGod }: GodDisplayProps) {
+	return (
+		<motion.div initial="initial" animate="show" className="w-max text-base">
+			<SimpleContainer correct={god.Name === actualGod.Name}>
+				<IconContainer
+					src={god.godIcon_URL}
+					alt={`${god.Name} icon`}
+					width={80 - 2}
+					height={80 - 2}
+				/>
+
+				{god.Name}
+			</SimpleContainer>
+		</motion.div>
+	);
+}
+
+type TextContainerProps = {
+	isSmallText?: boolean;
+} & ContainerProps;
 
 function TextContainer({
 	children,
@@ -66,7 +111,7 @@ function TextContainer({
 	);
 }
 
-export function GodDisplay({ god, actualGod }: GodDisplayProps) {
+export function DetailedGodDisplay({ god, actualGod }: GodDisplayProps) {
 	const [range, damage] = splitTypes(god.Type);
 	const [actualRange, actualDamage] = splitTypes(actualGod.Type);
 	const pros = god.Pros.split(", ");

@@ -8,61 +8,67 @@ import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
-import { DetailedGodsContainer } from "../display/GodsContainer";
+import { SimpleGodsContainer } from "../display/GodsContainer";
 import { IconContainer } from "../display/IconContainer";
 import { Timer } from "../display/Timer";
 import { FuzzyInput } from "../input/FuzzyInput";
 import { Loading } from "../layout/Loading";
 import { HomeGameLink } from "../link/HomeGameLink";
 
-export type ClassicGameProps = {
+export type AbilityGameProps = {
 	gods: Gods;
 };
 
-export function ClassicGame({ gods }: ClassicGameProps) {
+export function AbilityGame({ gods }: AbilityGameProps) {
 	const random = getDeterministicRandom(new Date());
+	const [uiRandom] = useState(Math.random());
+	// Has to be before random god selection
+	const [actualAbility] = useState<1 | 2 | 3 | 4 | 5>(
+		(Math.floor(random() * 4) + 1) as 1 | 2 | 3 | 4 | 5,
+	);
 	const [actualGod] = useState(gods[Math.floor(random() * gods.length)]);
-	const [actualGodId, setActualGodId] = useLocalStorage("classic", -1);
+	const [actual, setActual] = useLocalStorage("ability", {
+		god: -1,
+		ability: -1,
+	});
 
 	const [loaded, setLoaded] = useBool(false);
 
-	const [win, setWin] = useLocalStorage("classicWin", false);
+	const [win, setWin] = useLocalStorage("abilityWin", false);
 	const [guesses, setGuesses] = useState(0);
 
-	const [selected, setSelected] = useLocalStorage("classicSelectedValue", "");
+	const [selected, setSelected] = useLocalStorage("abilitySelectedValue", "");
 	const [selectedGods, setSelectedGods] = useState<Gods>([]);
 	const [selectedGodsIDs, setSelectedGodsIDs] = useLocalStorage<number[]>(
-		"classicSelectedGodsIDs",
+		"abilitySelectedGodsIDs",
 		[],
 	);
 
-	const winRef = useRef<HTMLDivElement>(null);
-	const nextRef = useRef<HTMLDivElement>(null);
+	const winRef = useRef<HTMLHeadingElement>(null);
 
 	// Print current god on dev
 	useEffect(() => {
 		dlog(actualGod.Name);
-	}, [actualGod.Name]);
+	}, [actualGod]);
 
 	// Save current god id
 	useEffect(() => {
-		setActualGodId(actualGod.id);
+		setActual({ god: actualGod.id, ability: actualAbility });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [actualGod.id]);
+	}, [actualAbility, actualGod]);
 
 	// Reset game current if god changes
 	useEffect(() => {
-		dlog(actualGod.id, actualGodId);
-		if (actualGodId !== -1 && actualGod.id !== actualGodId) {
-			window.localStorage.removeItem("classicSelectedValue");
+		if (actual.god !== -1 && actualGod.id !== actual.god) {
+			window.localStorage.removeItem("abilitySelectedValue");
 			setSelected("");
-			window.localStorage.removeItem("classicSelectedGodsIDs");
+			window.localStorage.removeItem("abilitySelectedGodsIDs");
 			setSelectedGodsIDs([]);
-			window.localStorage.removeItem("classicWin");
+			window.localStorage.removeItem("abilityWin");
 			setWin(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [actualGodId, actualGod.id]);
+	}, [actual.god, actualGod.id]);
 
 	// Scroll to win on win
 	useEffect(() => {
@@ -85,7 +91,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 
 	// Set loaded if no gods are selected
 	useEffect(() => {
-		const data = window.localStorage.getItem("classicSelectedGodsIDs");
+		const data = window.localStorage.getItem("abilitySelectedGodsIDs");
 		if (data === null || data === "[]") {
 			setSelectedGods([]);
 			setSelectedGodsIDs([]);
@@ -99,6 +105,29 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 			{!loaded && <Loading />}
 			{loaded && (
 				<>
+					<div className="mb-8">
+						<h2 className="mb-4">Who has this ability?</h2>
+						<div
+							className={cn(
+								"mx-auto w-fit",
+								// eslint-disable-next-line no-nested-ternary
+								guesses < 1
+									? uiRandom < 0.5
+										? "[&_img]:rotate-90"
+										: "[&_img]:-rotate-90"
+									: "[&_img]:rotate-0",
+								guesses < 2 ? "grayscale" : "grayscale-0",
+							)}
+						>
+							<IconContainer
+								alt="Ability icon"
+								src={actualGod[`godAbility${actualAbility}_URL`]}
+								height={78}
+								width={78}
+								anim
+							/>
+						</div>
+					</div>
 					<FuzzyInput
 						initialData={gods}
 						filteredData={selectedGodsIDs}
@@ -117,13 +146,15 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							if (god.Name === actualGod.Name && !win) {
 								setTimeout(() => {
 									setWin(true);
-								}, 150 * 9 + 300);
-								trackEvent("win-classic", { guesses }, "/classic");
+								}, 150 * 1 + 300);
+								trackEvent("win-ability", { guesses }, "/ability");
 							}
 							return true;
 						}}
 					/>
-					<DetailedGodsContainer gods={selectedGods} actualGod={actualGod} />
+
+					<SimpleGodsContainer actualGod={actualGod} gods={selectedGods} />
+
 					<div
 						ref={winRef}
 						className={cn(
@@ -148,11 +179,11 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 								</div>
 								<div className=" mt-8">
 									<HomeGameLink
-										name="Ability"
+										name="Skin"
 										description="Try the next game"
 										animate
 										onClick={() => {
-											trackEvent("click-next-classic", {}, "/classic");
+											trackEvent("click-next-ability", {}, "/ability");
 										}}
 									/>
 								</div>

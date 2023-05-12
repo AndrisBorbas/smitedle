@@ -11,7 +11,7 @@ export default function IndexPage() {
 				/>
 				<HomeGameLink name="Ability" description="Whose ability is it?" />
 				<HomeGameLink
-					name="Splash"
+					name="Skin"
 					description="Inspect the splash art and guess the god."
 				/>
 			</section>

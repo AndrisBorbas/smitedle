@@ -1,6 +1,6 @@
 import { God, Gods } from "@/lib/smiteApi";
 
-import { GodDisplay } from "./GodDisplay";
+import { DetailedGodDisplay, SimpleGodDisplay } from "./GodDisplay";
 
 export type GodsContainerProps = {
 	gods: Gods;
@@ -15,7 +15,7 @@ function HeaderContainer({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export function GodsContainer({ gods, actualGod }: GodsContainerProps) {
+export function DetailedGodsContainer({ gods, actualGod }: GodsContainerProps) {
 	return (
 		<div className="mx-auto flex w-max max-w-full flex-col justify-center gap-2 overflow-x-auto">
 			<div className="flex w-max flex-row items-center justify-center gap-2 text-sm">
@@ -31,7 +31,17 @@ export function GodsContainer({ gods, actualGod }: GodsContainerProps) {
 			</div>
 
 			{gods.map((god) => (
-				<GodDisplay key={god.Name} god={god} actualGod={actualGod} />
+				<DetailedGodDisplay key={god.Name} god={god} actualGod={actualGod} />
+			))}
+		</div>
+	);
+}
+
+export function SimpleGodsContainer({ gods, actualGod }: GodsContainerProps) {
+	return (
+		<div className="mx-auto flex w-max max-w-full flex-col justify-center gap-2 overflow-x-auto">
+			{gods.map((god) => (
+				<SimpleGodDisplay key={god.Name} god={god} actualGod={actualGod} />
 			))}
 		</div>
 	);

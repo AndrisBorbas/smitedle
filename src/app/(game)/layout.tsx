@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SiKofi } from "react-icons/si";
+import { SiGithub, SiKofi } from "react-icons/si";
 
 import { ResetButton } from "@/components/input/ResetButton";
 import { TrackingLink } from "@/components/link/TrackingLink";
@@ -15,7 +15,7 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
 				<ResetButton />
 			</div>
 			<section className="mx-auto text-center">
-				<Link className="mx-auto mb-4 block w-fit p-4" href="/">
+				<Link className="hover:text-glow mx-auto mb-4 block w-fit p-4" href="/">
 					<h1 className="text-6xl">Smitedle</h1>
 				</Link>
 				{children}
@@ -28,12 +28,30 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
 						isExternal
 						target="_blank"
 						eventName="click-layout-kofi"
-						className="group"
+						className="group whitespace-nowrap break-keep"
 					>
-						<span className="group-hover:underline">
+						<span className="group-hover:text-glow underline transition-all group-hover:decoration-accent group-hover:underline-offset-2">
 							consider supporting me on Ko-Fi
 						</span>{" "}
-						<SiKofi className="inline-block pb-1 text-3xl group-hover:text-accent" />
+						<SiKofi className="inline-block pb-1 text-3xl drop-shadow-glow transition-all group-hover:text-accent" />
+					</TrackingLink>
+				</div>
+				<div className="mt-4">
+					Bugs and issues can be reported on the{" "}
+					<TrackingLink
+						href="https://github.com/andrisborbas/smitedle/issues"
+						isExternal
+						target="_blank"
+						eventName="click-layout-bugs"
+						className="group whitespace-nowrap break-keep"
+					>
+						<span className="group-hover:text-glow underline transition-all group-hover:decoration-accent group-hover:underline-offset-2">
+							projects GitHub
+						</span>{" "}
+						<SiGithub className="inline-block pb-1 text-3xl drop-shadow-glow transition-all group-hover:text-accent" />{" "}
+						<span className="group-hover:text-glow underline transition-all group-hover:decoration-accent group-hover:underline-offset-2">
+							page.
+						</span>
 					</TrackingLink>
 				</div>
 			</section>

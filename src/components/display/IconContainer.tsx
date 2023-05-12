@@ -35,7 +35,7 @@ export function IconContainer({
 	anim = false,
 }: IconContainerProps) {
 	return anim ? (
-		<motion.div variants={appearAnim} className="fancyAnim">
+		<motion.div variants={appearAnim} className="fancyAnim w-fit">
 			<div
 				className={cn(
 					styles.imageShadow,
@@ -51,7 +51,7 @@ export function IconContainer({
 			className={cn(
 				styles.imageShadow,
 				// TODO: postcss doesnt like custom classes in css modules, try again later
-				"after:shadow-inner-xl relative border border-accent",
+				"after:shadow-inner-xl relative w-fit border border-accent",
 			)}
 		>
 			<Image src={src} alt={alt} width={width} height={height} unoptimized />

@@ -7,6 +7,7 @@ export type HomeGameLinkProps = {
 	description?: string;
 	icon?: string;
 	onClick?: () => void;
+	animate?: boolean;
 };
 
 export function HomeGameLink({
@@ -14,18 +15,26 @@ export function HomeGameLink({
 	description,
 	icon,
 	onClick,
+	animate = false,
 }: HomeGameLinkProps) {
 	return (
 		<Link
 			href={`/${name.toLowerCase()}`}
 			className={cn(
 				"relative block w-80 overflow-hidden border-[3px] border-accent bg-white/5 p-4 text-left text-white/80 backdrop-blur transition-all duration-500",
-				"fancyButton hover:bg-white/20 hover:text-white",
+				"fancyButton group hover:bg-white/20 hover:text-white",
 			)}
 			onClick={onClick}
 		>
-			<h4 className="mb-1 text-lg">{name}</h4>
-			<p className="text-sm">{description}</p>
+			<h4 className="group-hover:text-glow mb-1 text-lg">{name}</h4>
+			<p className="group-hover:text-glow text-sm">{description}</p>
+			{!!animate && (
+				<div
+					className="animate-ping2 pointer-events-none absolute inset-0"
+					draggable={false}
+					aria-hidden
+				/>
+			)}
 		</Link>
 	);
 }
