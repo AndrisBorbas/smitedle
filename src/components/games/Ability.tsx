@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { getDeterministicRandom, timeRemaining } from "@/lib/game";
+import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
@@ -117,6 +117,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 										: "[&_img]:-rotate-90"
 									: "[&_img]:rotate-0",
 								guesses < 2 ? "grayscale" : "grayscale-0",
+								win && "grayscale-0 [&_img]:rotate-0",
 							)}
 						>
 							<IconContainer

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { getDeterministicRandom, timeRemaining } from "@/lib/game";
+import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
@@ -37,7 +37,6 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 	);
 
 	const winRef = useRef<HTMLDivElement>(null);
-	const nextRef = useRef<HTMLDivElement>(null);
 
 	// Print current god on dev
 	useEffect(() => {
