@@ -4,7 +4,7 @@ export default function IndexPage() {
 	return (
 		<>
 			<h2 className="mb-8 text-xl">Guess the Smite god.</h2>
-			<section className="flex flex-col items-center gap-4">
+			<section className="mx-auto grid max-w-[20rem] grid-cols-1 justify-items-center gap-4">
 				<HomeGameLink
 					name="Classic"
 					description="Guess a god and see what you get right."
@@ -14,6 +14,7 @@ export default function IndexPage() {
 					name="Skin"
 					description="Inspect the splash art and guess the god."
 				/>
+				<HomeGameLink name="Item" description="Guess the item from its icon." />
 			</section>
 		</>
 	);

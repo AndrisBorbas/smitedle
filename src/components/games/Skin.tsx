@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Skin } from "@joshmiquel/hirez/@types";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
@@ -14,32 +15,32 @@ import { WinContainer } from "../display/WinContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
 import { Loading } from "../layout/Loading";
 
-export type AbilityGameProps = {
+export type SkinGameProps = {
 	gods: Gods;
+	skins: Skin.Base[];
 };
 
-export function AbilityGame({ gods }: AbilityGameProps) {
+export function SkinGame({ gods, skins }: SkinGameProps) {
 	const random = getDeterministicRandom(new Date());
-	const [uiRandom] = useState(Math.random());
-	// Has to be before random god selection
-	const [actualAbility] = useState<1 | 2 | 3 | 4 | 5>(
-		(Math.floor(random() * 4) + 1) as 1 | 2 | 3 | 4 | 5,
-	);
-	const [actualGod] = useState(gods[Math.floor(random() * gods.length)]);
-	const [actual, setActual] = useLocalStorage("ability", {
+	const [actualSkin] = useState(skins[Math.floor(random() * skins.length)]);
+	const actualGod = useMemo(() => {
+		return gods.find((god) => god.id === actualSkin.god_id);
+	}, [actualSkin, gods]);
+
+	const [actual, setActual] = useLocalStorage("skin", {
 		god: -1,
-		ability: -1,
+		skin1: -1,
 	});
 
 	const [loaded, setLoaded] = useBool(false);
 
-	const [win, setWin] = useLocalStorage("abilityWin", false);
+	const [win, setWin] = useLocalStorage("skinWin", false);
 	const [guesses, setGuesses] = useState(0);
 
-	const [selected, setSelected] = useLocalStorage("abilitySelectedValue", "");
+	const [selected, setSelected] = useLocalStorage("skinSelectedValue", "");
 	const [selectedGods, setSelectedGods] = useState<Gods>([]);
 	const [selectedGodsIDs, setSelectedGodsIDs] = useLocalStorage<number[]>(
-		"abilitySelectedGodsIDs",
+		"skinSelectedGodsIDs",
 		[],
 	);
 
@@ -47,27 +48,27 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 
 	// Print current god on dev
 	useEffect(() => {
-		dlog(actualGod.Name);
-	}, [actualGod]);
+		dlog(actualSkin.god_name);
+	}, [actualSkin]);
 
 	// Save current god id
 	useEffect(() => {
-		setActual({ god: actualGod.id, ability: actualAbility });
+		setActual({ god: actualSkin.god_id, skin1: actualSkin.skin_id1 });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [actualAbility, actualGod]);
+	}, [actualSkin]);
 
 	// Reset game current if god changes
 	useEffect(() => {
-		if (actual.god !== -1 && actualGod.id !== actual.god) {
-			window.localStorage.removeItem("abilitySelectedValue");
+		if (actual.god !== -1 && actualSkin.god_id !== actual.god) {
+			window.localStorage.removeItem("skinSelectedValue");
 			setSelected("");
-			window.localStorage.removeItem("abilitySelectedGodsIDs");
+			window.localStorage.removeItem("skinSelectedGodsIDs");
 			setSelectedGodsIDs([]);
-			window.localStorage.removeItem("abilityWin");
+			window.localStorage.removeItem("skinWin");
 			setWin(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [actual.god, actualGod.id]);
+	}, [actual.god, actualSkin.god_id]);
 
 	// Scroll to win on win
 	useEffect(() => {
@@ -91,7 +92,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 
 	// Set loaded if no gods are selected
 	useEffect(() => {
-		const data = window.localStorage.getItem("abilitySelectedGodsIDs");
+		const data = window.localStorage.getItem("skinSelectedGodsIDs");
 		if (data === null || data === "[]") {
 			setSelectedGods([]);
 			setSelectedGodsIDs([]);
@@ -106,25 +107,21 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 			{loaded && (
 				<>
 					<div className="mb-8">
-						<h2 className="mb-4">Who has this ability?</h2>
+						<h2 className="mb-4">Who has this skin?</h2>
 						<div
 							className={cn(
 								"mx-auto w-fit",
 								// eslint-disable-next-line no-nested-ternary
-								guesses < 1
-									? uiRandom < 0.5
-										? "[&_img]:rotate-90"
-										: "[&_img]:-rotate-90"
-									: "[&_img]:rotate-0",
+								guesses < 1 ? "[&_img]:blur-sm" : "[&_img]:blur-none",
 								guesses < 2 ? "grayscale" : "grayscale-0",
-								win && "grayscale-0 [&_img]:rotate-0",
+								win && "grayscale-0 [&_img]:blur-none",
 							)}
 						>
 							<IconContainer
-								alt="Ability icon"
-								src={actualGod[`godAbility${actualAbility}_URL`]}
-								height={78}
-								width={78}
+								alt="Skin image"
+								src={actualSkin.godSkin_URL}
+								height={426.66}
+								width={320}
 								anim
 								priority
 							/>
@@ -145,18 +142,18 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 							setSelectedGodsIDs([god.id, ...selectedGodsIDs]);
 							setSelectedGods([god, ...selectedGods]);
 
-							if (god.Name === actualGod.Name && !win) {
+							if (god.Name === actualSkin.god_name && !win) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-ability", { guesses }, "/ability");
+								trackEvent("win-skin", { guesses }, "/skin");
 							}
 							return true;
 						}}
 					/>
 
 					<SimpleGodsContainer
-						actualGodName={actualGod.Name}
+						actualGodName={actualSkin.god_name}
 						gods={selectedGods}
 					/>
 
@@ -164,9 +161,9 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						ref={winRef}
 						win={win}
 						actualGod={actualGod}
-						nextGame="Skin"
+						nextGame="Item"
 						tracker={() => {
-							trackEvent("click-next-ability", {}, "/ability");
+							trackEvent("click-next-skin", {}, "/skin");
 						}}
 					/>
 				</>

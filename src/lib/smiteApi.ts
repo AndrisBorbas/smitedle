@@ -1,4 +1,5 @@
 import { Smite } from "@joshmiquel/hirez";
+import { Skin } from "@joshmiquel/hirez/@types";
 import fs from "fs";
 
 import { dlog } from "./utils";
@@ -83,31 +84,21 @@ export async function getGods() {
 	return gods;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function saveRawGods(gods: any) {
-	fs.writeFile(
-		"./public/data/generated/rawGods.json",
-		JSON.stringify(gods),
-		(err) => {
-			if (err) {
-				dlog(err);
-				return;
-			}
-			dlog("Raw gods saved");
-		},
-	);
+export async function getItems() {
+	const items = await smiteApi().getItems();
+	return items;
 }
 
-export async function saveGods(gods: HirezGod[]) {
+export async function save(data: object[], name: string) {
 	fs.writeFile(
-		"./public/data/generated/gods.json",
-		JSON.stringify(gods),
+		`./public/data/generated/${name}.json`,
+		JSON.stringify(data),
 		(err) => {
 			if (err) {
 				dlog(err);
 				return;
 			}
-			dlog("Gods saved");
+			dlog(`${name} saved`);
 		},
 	);
 }
@@ -177,4 +168,40 @@ export async function exportGods(gods: HirezGod[]) {
 			dlog("Gods exported");
 		},
 	);
+}
+
+export async function getAllSkins() {
+	const gods = await loadGods();
+
+	const api = smiteApi();
+	await api.ping();
+	await api.testSession();
+
+	// eslint-disable-next-line no-promise-executor-return
+	await new Promise((resolve) => setTimeout(resolve, 3000));
+
+	const skins = await Promise.all(
+		gods.map((god) => {
+			const currentSkins = api.getGodSkins(god.id);
+			return currentSkins;
+		}),
+	);
+
+	return skins;
+}
+
+export function organizeSkins(skins: Skin.Base[][]) {
+	const organizedSkins: Skin.Base[] = [];
+	skins.forEach((godSkins) => {
+		organizedSkins.push(...godSkins);
+	});
+	return organizedSkins;
+}
+
+export async function loadSkins() {
+	const skins = await fs.readFileSync(
+		`./public/data/generated/skins.json`,
+		"utf-8",
+	);
+	return JSON.parse(skins) as Skin.Base[];
 }

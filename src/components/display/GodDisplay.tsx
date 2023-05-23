@@ -11,6 +11,11 @@ export type GodDisplayProps = {
 	actualGod: God;
 };
 
+export type SimpleGodDisplayProps = {
+	god: God;
+	actualGodName: string;
+};
+
 function splitTypes(roles: string) {
 	return roles.split(", ");
 }
@@ -60,10 +65,13 @@ function SimpleContainer({ children, correct = false }: ContainerProps) {
 	);
 }
 
-export function SimpleGodDisplay({ god, actualGod }: GodDisplayProps) {
+export function SimpleGodDisplay({
+	god,
+	actualGodName,
+}: SimpleGodDisplayProps) {
 	return (
 		<motion.div initial="initial" animate="show" className="w-max text-base">
-			<SimpleContainer correct={god.Name === actualGod.Name}>
+			<SimpleContainer correct={god.Name === actualGodName}>
 				<IconContainer
 					src={god.godIcon_URL}
 					alt={`${god.Name} icon`}

@@ -11,6 +11,7 @@ export type IconContainerProps = {
 	width?: number;
 	height?: number;
 	anim?: boolean;
+	priority?: boolean;
 };
 
 export const appearAnim = {
@@ -33,6 +34,7 @@ export function IconContainer({
 	width = 64,
 	height = 64,
 	anim = false,
+	priority = false,
 }: IconContainerProps) {
 	return anim ? (
 		<motion.div variants={appearAnim} className="fancyAnim w-fit">
@@ -43,7 +45,14 @@ export function IconContainer({
 					"after:shadow-inner-xl relative border border-accent",
 				)}
 			>
-				<Image src={src} alt={alt} width={width} height={height} unoptimized />
+				<Image
+					src={src}
+					alt={alt}
+					width={width}
+					height={height}
+					unoptimized
+					priority={priority}
+				/>
 			</div>
 		</motion.div>
 	) : (
@@ -54,7 +63,14 @@ export function IconContainer({
 				"after:shadow-inner-xl relative w-fit border border-accent",
 			)}
 		>
-			<Image src={src} alt={alt} width={width} height={height} unoptimized />
+			<Image
+				src={src}
+				alt={alt}
+				width={width}
+				height={height}
+				unoptimized
+				priority={priority}
+			/>
 		</div>
 	);
 }

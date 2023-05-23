@@ -91,7 +91,7 @@ export function FuzzyInput({
 					<div
 						className={cn(
 							styles["animate-float-fade"],
-							"pointer-events-none absolute inset-x-0 -top-8 z-30 select-none text-center font-bold text-yellow-300 font-serif",
+							"pointer-events-none absolute inset-x-0 -top-8 z-30 select-none text-center font-serif font-bold text-yellow-300",
 							showImmune ? "block" : "hidden",
 						)}
 						aria-hidden="true"

@@ -7,6 +7,11 @@ export type GodsContainerProps = {
 	actualGod: God;
 };
 
+export type SimpleGodsContainerProps = {
+	gods: Gods;
+	actualGodName: string;
+};
+
 function HeaderContainer({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="flex h-14 w-20 items-center justify-center rounded-b border-b-2 border-accent">
@@ -37,11 +42,18 @@ export function DetailedGodsContainer({ gods, actualGod }: GodsContainerProps) {
 	);
 }
 
-export function SimpleGodsContainer({ gods, actualGod }: GodsContainerProps) {
+export function SimpleGodsContainer({
+	gods,
+	actualGodName,
+}: SimpleGodsContainerProps) {
 	return (
 		<div className="mx-auto flex w-max max-w-full flex-col justify-center gap-2 overflow-x-auto">
 			{gods.map((god) => (
-				<SimpleGodDisplay key={god.Name} god={god} actualGod={actualGod} />
+				<SimpleGodDisplay
+					key={god.Name}
+					god={god}
+					actualGodName={actualGodName}
+				/>
 			))}
 		</div>
 	);

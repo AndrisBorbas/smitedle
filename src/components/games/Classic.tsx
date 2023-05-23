@@ -6,14 +6,12 @@ import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
-import { cn, dlog } from "@/lib/utils";
+import { dlog } from "@/lib/utils";
 
 import { DetailedGodsContainer } from "../display/GodsContainer";
-import { IconContainer } from "../display/IconContainer";
-import { Timer } from "../display/Timer";
+import { WinContainer } from "../display/WinContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
 import { Loading } from "../layout/Loading";
-import { HomeGameLink } from "../link/HomeGameLink";
 
 export type ClassicGameProps = {
 	gods: Gods;
@@ -77,6 +75,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				selectedGodsIDs.map((id) => gods.find((g) => g.id === id)!),
 			);
+			setGuesses(selectedGodsIDs.length);
 			setLoaded.setTrue();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,42 +121,18 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 							return true;
 						}}
 					/>
+
 					<DetailedGodsContainer gods={selectedGods} actualGod={actualGod} />
-					<div
+
+					<WinContainer
 						ref={winRef}
-						className={cn(
-							"mx-auto mt-8 flex w-fit flex-col items-center border border-accent bg-white/5 p-8 backdrop-blur",
-							win ? "flex" : "hidden",
-						)}
-					>
-						{win && (
-							<>
-								<h3 className="text-glow mb-4">You won! 🏆</h3>
-								<h4 className="mb-1">The god was: {actualGod.Name}</h4>
-								<h5 className="mb-2">{actualGod.Title}</h5>
-								<IconContainer
-									src={actualGod.godCard_URL}
-									alt={`${actualGod.Name} thumbnail`}
-									width={180}
-									height={335}
-									anim
-								/>
-								<div className="mt-8">
-									<Timer />
-								</div>
-								<div className=" mt-8">
-									<HomeGameLink
-										name="Ability"
-										description="Try the next game"
-										animate
-										onClick={() => {
-											trackEvent("click-next-classic", {}, "/classic");
-										}}
-									/>
-								</div>
-							</>
-						)}
-					</div>
+						win={win}
+						actualGod={actualGod}
+						nextGame="Ability"
+						tracker={() => {
+							trackEvent("click-next-classic", {}, "/classic");
+						}}
+					/>
 				</>
 			)}
 		</section>

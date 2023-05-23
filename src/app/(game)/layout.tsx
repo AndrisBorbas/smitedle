@@ -11,9 +11,6 @@ type IndexLayoutProps = {
 export default function IndexLayout({ children }: IndexLayoutProps) {
 	return (
 		<>
-			<div className="fixed right-2 top-2 z-50">
-				<ResetButton />
-			</div>
 			<section className="mx-auto text-center">
 				<Link className="hover:text-glow mx-auto mb-4 block w-fit p-4" href="/">
 					<h1 className="text-6xl">Smitedle</h1>
@@ -55,6 +52,8 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
 					</TrackingLink>
 				</div>
 			</section>
+
+			<ResetButton />
 		</>
 	);
 }

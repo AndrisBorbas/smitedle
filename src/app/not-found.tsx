@@ -9,7 +9,8 @@ export default function NotFound() {
 			</Link>
 
 			<h2 className="mb-4">404 - Not Found</h2>
-			<p>This page doesn&apos;t exist</p>
+			<p>This page sadly doesn&apos;t exist (yet? 🤔)</p>
+			<p>Maybe check back later</p>
 			<Link className="mx-auto mb-12 mt-8 block p-4" href="/">
 				<span className="group break-keep text-xl">
 					Return to the home screen&nbsp;

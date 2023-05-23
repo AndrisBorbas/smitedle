@@ -21,7 +21,7 @@ export function HomeGameLink({
 		<Link
 			href={`/${name.toLowerCase()}`}
 			className={cn(
-				"relative block w-80 overflow-hidden border-[3px] border-accent bg-white/5 p-4 text-left text-white/80 backdrop-blur transition-all duration-500",
+				"max-w-80 relative block w-full overflow-hidden border-[3px] border-accent bg-white/5 p-4 text-left text-white/80 backdrop-blur transition-all duration-500",
 				"fancyButton group hover:bg-white/20 hover:text-white",
 			)}
 			onClick={onClick}

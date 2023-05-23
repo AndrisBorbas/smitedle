@@ -43,3 +43,4 @@ public/*.js
 .github/
 /public/data/*
 /hirez/*
+/scripts/*
