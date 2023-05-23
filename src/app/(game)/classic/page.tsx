@@ -11,6 +11,17 @@ export const metadata: Metadata = {
 	},
 	description:
 		"Guess the god, and see how many attributes you can get right in this wordle style game.",
+	openGraph: {
+		title: `Classic | ${siteConfig.name}`,
+		description:
+			"Guess the god, and see how many attributes you can get right in this wordle style game.",
+		siteName: siteConfig.name,
+	},
+	twitter: {
+		title: `Classic | ${siteConfig.name}`,
+		description:
+			"Guess the god, and see how many attributes you can get right in this wordle style game.",
+	},
 };
 
 export default async function ClassicPage() {

@@ -10,6 +10,15 @@ export const metadata: Metadata = {
 		template: `%s | ${siteConfig.name}`,
 	},
 	description: "Guess who has the ability that is shown in the image.",
+	openGraph: {
+		title: `Ability | ${siteConfig.name}`,
+		description: "Guess who has the ability that is shown in the image.",
+		siteName: siteConfig.name,
+	},
+	twitter: {
+		title: `Ability | ${siteConfig.name}`,
+		description: "Guess who has the ability that is shown in the image.",
+	},
 };
 
 export default async function AbilityPage() {

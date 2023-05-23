@@ -10,6 +10,15 @@ export const metadata: Metadata = {
 		template: `%s | ${siteConfig.name}`,
 	},
 	description: "Try to find out whose skin is shown in the image.",
+	openGraph: {
+		title: `Skin | ${siteConfig.name}`,
+		description: "Try to find out whose skin is shown in the image.",
+		siteName: siteConfig.name,
+	},
+	twitter: {
+		title: `Skin | ${siteConfig.name}`,
+		description: "Try to find out whose skin is shown in the image.",
+	},
 };
 
 export default async function AbilityPage() {

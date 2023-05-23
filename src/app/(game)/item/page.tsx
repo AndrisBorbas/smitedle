@@ -9,6 +9,15 @@ export const metadata: Metadata = {
 		template: `%s | ${siteConfig.name}`,
 	},
 	description: "Guess the Smite item from its icon.",
+	openGraph: {
+		title: `Item | ${siteConfig.name}`,
+		description: "Guess the Smite item from its icon.",
+		siteName: siteConfig.name,
+	},
+	twitter: {
+		title: `Item | ${siteConfig.name}`,
+		description: "Guess the Smite item from its icon.",
+	},
 };
 
 export default async function ClassicPage() {
