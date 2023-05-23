@@ -8,8 +8,7 @@ export const metadata: Metadata = {
 		default: "Item",
 		template: `%s | ${siteConfig.name}`,
 	},
-	description:
-		"Guess the god, and see how many attributes you can get right in this wordle style game.",
+	description: "Guess the Smite item from its icon.",
 };
 
 export default async function ClassicPage() {

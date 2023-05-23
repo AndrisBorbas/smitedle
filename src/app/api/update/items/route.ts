@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { siteConfig } from "@/data/site";
-import { getItems, save } from "@/lib/smiteApi";
+import { getItems, organizeItems, save } from "@/lib/smiteApi";
 import { dlog } from "@/lib/utils";
 
 export async function GET() {
@@ -12,10 +12,16 @@ export async function GET() {
 	const rawItems = await getItems();
 
 	save(rawItems, "rawItems");
-	// const goodGods = trimGods(gods);
-	// saveGods(goodGods);
+	const { activeItems, inactiveItems } = organizeItems(rawItems);
+	save(activeItems, "items");
+	save(inactiveItems, "inactiveItems");
 
-	dlog("Items updated");
+	dlog(
+		rawItems.length,
+		activeItems.length,
+		inactiveItems.length,
+		"Items updated",
+	);
 
 	return NextResponse.json(rawItems);
 }

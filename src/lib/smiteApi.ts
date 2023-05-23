@@ -1,5 +1,5 @@
 import { Smite } from "@joshmiquel/hirez";
-import { Skin } from "@joshmiquel/hirez/@types";
+import { Item, Skin } from "@joshmiquel/hirez/@types";
 import fs from "fs";
 
 import { dlog } from "./utils";
@@ -82,11 +82,6 @@ export function smiteApi() {
 export async function getGods() {
 	const gods = await smiteApi().getGods();
 	return gods;
-}
-
-export async function getItems() {
-	const items = await smiteApi().getItems();
-	return items;
 }
 
 export async function save(data: object[], name: string) {
@@ -204,4 +199,28 @@ export async function loadSkins() {
 		"utf-8",
 	);
 	return JSON.parse(skins) as Skin.Base[];
+}
+
+export async function getItems() {
+	const items = await smiteApi().getItems();
+	return items;
+}
+
+export function organizeItems(items: Item.Base[]) {
+	const activeItems = items.filter(
+		(item) => item.ActiveFlag === Item.ActiveFlag.Y,
+	);
+	const inactiveItems = items.filter(
+		(item) => item.ActiveFlag === Item.ActiveFlag.N,
+	);
+
+	return { activeItems, inactiveItems };
+}
+
+export async function loadItems() {
+	const items = await fs.readFileSync(
+		`./public/data/generated/items.json`,
+		"utf-8",
+	);
+	return JSON.parse(items) as Item.Base[];
 }
