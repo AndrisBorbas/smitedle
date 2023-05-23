@@ -21,6 +21,7 @@ async function createSmiteApi() {
 	console.log(await api.ping());
 	try {
 		await api.createSession();
+		console.log(await api.getDataUsed());
 	} catch (error) {
 		console.error(error);
 		throw new Error("Failed to create session");

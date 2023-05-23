@@ -207,7 +207,9 @@ export async function getItems() {
 }
 
 export function organizeItems(items: Item.Base[]) {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	const activeItems = items.filter((item) => item.ActiveFlag === "y");
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	const inactiveItems = items.filter((item) => item.ActiveFlag === "n");
 
 	return { activeItems, inactiveItems };
