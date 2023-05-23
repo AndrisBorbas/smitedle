@@ -207,12 +207,8 @@ export async function getItems() {
 }
 
 export function organizeItems(items: Item.Base[]) {
-	const activeItems = items.filter(
-		(item) => item.ActiveFlag === Item.ActiveFlag.Y,
-	);
-	const inactiveItems = items.filter(
-		(item) => item.ActiveFlag === Item.ActiveFlag.N,
-	);
+	const activeItems = items.filter((item) => item.ActiveFlag === "y");
+	const inactiveItems = items.filter((item) => item.ActiveFlag === "n");
 
 	return { activeItems, inactiveItems };
 }
