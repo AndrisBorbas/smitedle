@@ -49,7 +49,7 @@ export default withPlugins(
 			{
 				pwa: {
 					dest: "public",
-					disable: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
+					disable: true, // process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
 				},
 			},
 		],
