@@ -45,3 +45,5 @@ public/workbox-*.js
 
 !/public/data/generated/gods.json
 !/public/data/generated/skins.json
+!/public/data/generated/items.json
+!/public/data/generated/inactiveItems.json
