@@ -101,6 +101,10 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		dlog(guesses, "guesses");
+	}, [guesses]);
+
 	return (
 		<section className="mx-auto px-2 text-center">
 			{!loaded && <Loading />}
@@ -111,7 +115,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						<div
 							className={cn(
 								"mx-auto w-fit",
-								// eslint-disable-next-line no-nested-ternary
+								// FIXME: doesnt work
 								guesses < 1 ? "[&_img]:blur-sm" : "[&_img]:blur-none",
 								guesses < 2 ? "grayscale" : "grayscale-0",
 								win && "grayscale-0 [&_img]:blur-none",

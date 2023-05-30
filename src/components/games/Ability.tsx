@@ -100,6 +100,10 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		dlog(guesses, "guesses");
+	}, [guesses]);
+
 	return (
 		<section className="mx-auto px-2 text-center">
 			{!loaded && <Loading />}
@@ -110,6 +114,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						<div
 							className={cn(
 								"mx-auto w-fit",
+								// FIXME: doesnt work
 								// eslint-disable-next-line no-nested-ternary
 								guesses < 1
 									? uiRandom < 0.5

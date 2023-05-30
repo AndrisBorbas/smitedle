@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import { TbRefreshAlert } from "react-icons/tb";
 
 import { trackEvent } from "@/lib/track";
@@ -9,9 +8,7 @@ import { cn } from "@/lib/utils";
 
 export function ResetButton() {
 	const [clicks, setClicks] = useState(0);
-	if (typeof window === "undefined") {
-		return null;
-	}
+
 	return (
 		<div className="fixed right-2 top-2 z-40">
 			<button

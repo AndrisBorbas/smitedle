@@ -92,6 +92,10 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		dlog(guesses, "guesses");
+	}, [guesses]);
+
 	return (
 		<section className="mx-auto px-2 text-center">
 			{!loaded && <Loading />}
