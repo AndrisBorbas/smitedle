@@ -66,6 +66,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 			setSelectedGodsIDs([]);
 			window.localStorage.removeItem("skinWin");
 			setWin(false);
+			setGuesses(0);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [actual.god, actualSkin.god_id]);
@@ -96,14 +97,11 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 		if (data === null || data === "[]") {
 			setSelectedGods([]);
 			setSelectedGodsIDs([]);
+			setGuesses(0);
 			setLoaded.setTrue();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	useEffect(() => {
-		dlog(guesses, "guesses");
-	}, [guesses]);
 
 	return (
 		<section className="mx-auto px-2 text-center">
@@ -115,7 +113,6 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						<div
 							className={cn(
 								"mx-auto w-fit",
-								// FIXME: doesnt work
 								guesses < 1 ? "[&_img]:blur-sm" : "[&_img]:blur-none",
 								guesses < 2 ? "grayscale" : "grayscale-0",
 								win && "grayscale-0 [&_img]:blur-none",

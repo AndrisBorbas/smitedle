@@ -65,6 +65,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 			setSelectedGodsIDs([]);
 			window.localStorage.removeItem("abilityWin");
 			setWin(false);
+			setGuesses(0);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [actual.god, actualGod.id]);
@@ -95,6 +96,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 		if (data === null || data === "[]") {
 			setSelectedGods([]);
 			setSelectedGodsIDs([]);
+			setGuesses(0);
 			setLoaded.setTrue();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,7 +116,6 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						<div
 							className={cn(
 								"mx-auto w-fit",
-								// FIXME: doesnt work
 								// eslint-disable-next-line no-nested-ternary
 								guesses < 1
 									? uiRandom < 0.5

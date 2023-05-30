@@ -57,6 +57,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 			setSelectedGodsIDs([]);
 			window.localStorage.removeItem("classicWin");
 			setWin(false);
+			setGuesses(0);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [actualGodId, actualGod.id]);
@@ -87,6 +88,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 		if (data === null || data === "[]") {
 			setSelectedGods([]);
 			setSelectedGodsIDs([]);
+			setGuesses(0);
 			setLoaded.setTrue();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
