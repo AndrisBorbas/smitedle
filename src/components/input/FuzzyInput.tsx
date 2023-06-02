@@ -161,7 +161,7 @@ export function FuzzyInput({
 								className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
 								onClick={() => {
 									setSelected(item.DeviceName);
-									setGods([]);
+									setItems([]);
 								}}
 							>
 								<Preview item={item} showIcon={showIcon} />
