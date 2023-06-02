@@ -9,7 +9,7 @@ import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
-import { SimpleGodsContainer } from "../display/GodsContainer";
+import { SimpleContainer } from "../display/GodsContainer";
 import { IconContainer } from "../display/IconContainer";
 import { WinContainer } from "../display/WinContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
@@ -129,7 +129,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						</div>
 					</div>
 					<FuzzyInput
-						initialData={gods}
+						initialGods={gods}
 						filteredData={selectedGodsIDs}
 						selected={selected}
 						setSelected={setSelected}
@@ -153,8 +153,8 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						}}
 					/>
 
-					<SimpleGodsContainer
-						actualGodName={actualSkin.god_name}
+					<SimpleContainer
+						actualName={actualSkin.god_name}
 						gods={selectedGods}
 					/>
 
@@ -162,6 +162,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						ref={winRef}
 						win={win}
 						actualGod={actualGod}
+						word="skin"
 						nextGame="Item"
 						tracker={() => {
 							trackEvent("click-next-skin", {}, "/skin");

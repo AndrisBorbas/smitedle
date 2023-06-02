@@ -104,7 +104,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 			{loaded && (
 				<>
 					<FuzzyInput
-						initialData={gods}
+						initialGods={gods}
 						filteredData={selectedGodsIDs}
 						selected={selected}
 						setSelected={setSelected}
@@ -134,6 +134,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 						ref={winRef}
 						win={win}
 						actualGod={actualGod}
+						word="god"
 						nextGame="Ability"
 						tracker={() => {
 							trackEvent("click-next-classic", {}, "/classic");

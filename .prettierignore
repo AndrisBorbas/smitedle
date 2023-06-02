@@ -44,3 +44,5 @@ public/workbox-*.js
 /public/data/*
 
 pnpm-lock.yaml
+
+.github

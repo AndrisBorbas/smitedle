@@ -1,5 +1,6 @@
 "use client";
 
+import { Item } from "@joshmiquel/hirez/@types";
 import { filter as fuzzyFilter, sort as fuzzySort } from "fuzzyjs";
 import { useState } from "react";
 import { BsArrowReturnLeft } from "react-icons/bs";
@@ -12,48 +13,75 @@ import { Preview } from "../display/Preview";
 import styles from "./FuzzyInput.module.scss";
 
 export type FuzzyInputProps = {
-	initialData: Gods;
+	initialGods?: Gods;
+	initialItems?: Item.Base[];
 	filteredData: number[];
-	selectionProperty?: "Name";
+	// selectionProperty?: "Name" | "DeviceName";
 	selected: string;
 	disabled?: boolean;
 	setSelected: (value: string) => void;
 	submit: () => boolean;
+	showIcon?: boolean;
 };
 
 export function FuzzyInput({
-	initialData,
+	initialGods,
+	initialItems,
 	filteredData,
-	selectionProperty = "Name",
+	// selectionProperty,
 	selected,
 	disabled,
 	setSelected,
 	submit,
+	showIcon = true,
 }: FuzzyInputProps) {
-	const [data, setData] = useState<Gods>([]);
+	const [gods, setGods] = useState<Gods>([]);
+	const [items, setItems] = useState<Item.Base[]>([]);
 	const [isFocused, setIsFocused] = useBool(false);
 	const [isHovered, setIsHovered] = useBool(false);
 	const [showImmune, setShowImmune] = useBool(false);
 
 	function searchItem(query: string) {
 		if (!query) {
-			setData([]);
+			setGods([]);
+			setItems([]);
 			return;
 		}
 
-		const filtered = initialData
-			.filter((item) => !filteredData.some((id) => id === item.id))
-			.filter(
-				fuzzyFilter(query, { iterator: (item) => item[selectionProperty] }),
-			);
-		const result = filtered
-			.sort(fuzzySort(query, { iterator: (item) => item[selectionProperty] }))
-			.slice(0, 6);
+		if (initialGods) {
+			const filtered = initialGods
+				.filter((god) => !filteredData.some((id) => id === god.id))
+				.filter(
+					fuzzyFilter(query, {
+						iterator: (god) => god.Name,
+					}),
+				);
+			const result = filtered
+				.sort(
+					fuzzySort(query, {
+						iterator: (god) => god.Name,
+					}),
+				)
+				.slice(0, 6);
 
-		if (result.length) {
-			setData(result);
-		} else {
-			setData([]);
+			if (result.length) {
+				setGods(result);
+			} else {
+				setGods([]);
+			}
+		} else if (initialItems) {
+			const filtered = initialItems
+				.filter((item) => !filteredData.some((id) => id === item.ItemId))
+				.filter(fuzzyFilter(query, { iterator: (item) => item.DeviceName }));
+			const result = filtered
+				.sort(fuzzySort(query, { iterator: (item) => item.DeviceName }))
+				.slice(0, 6);
+
+			if (result.length) {
+				setItems(result);
+			} else {
+				setItems([]);
+			}
 		}
 	}
 
@@ -63,7 +91,9 @@ export function FuzzyInput({
 				<input
 					className="w-full border-2 border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/20 focus:outline-none focus:ring-1 focus:ring-accent disabled:cursor-not-allowed"
 					type="search"
-					placeholder="Type a gods name..."
+					placeholder={`Type ${initialGods ? "a gods" : ""}${
+						initialItems ? "an items" : ""
+					} name...`}
 					onChange={(e) => {
 						setSelected(e.target.value);
 						searchItem(e.target.value);
@@ -102,26 +132,39 @@ export function FuzzyInput({
 				</div>
 			</div>
 			<div className="relative">
-				{data.length > 0 && (isFocused || isHovered) && (
+				{(gods.length > 0 || items.length > 0) && (isFocused || isHovered) && (
 					<div
-						className="absolute inset-x-0 top-0 z-10 mx-auto flex max-h-72 w-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
+						className="absolute inset-x-0 top-0 z-10 mx-auto flex max-h-80 w-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
 						onMouseEnter={() => setIsHovered.setTrue()}
 						onMouseLeave={() => setIsHovered.setFalse()}
 						onMouseDown={() => setIsHovered.setTrue()}
 						role="listbox"
 						tabIndex={0}
 					>
-						{data.map((item) => (
+						{gods.map((god) => (
 							<button
-								key={item.Name}
+								key={god.Name}
 								type="button"
 								className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
 								onClick={() => {
-									setSelected(item.Name);
-									setData([]);
+									setSelected(god.Name);
+									setGods([]);
 								}}
 							>
-								<Preview item={item} />
+								<Preview god={god} showIcon={showIcon} />
+							</button>
+						))}
+						{items.map((item) => (
+							<button
+								key={item.DeviceName}
+								type="button"
+								className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
+								onClick={() => {
+									setSelected(item.DeviceName);
+									setGods([]);
+								}}
+							>
+								<Preview item={item} showIcon={showIcon} />
 							</button>
 						))}
 					</div>

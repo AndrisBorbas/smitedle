@@ -8,7 +8,7 @@ import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
-import { SimpleGodsContainer } from "../display/GodsContainer";
+import { SimpleContainer } from "../display/GodsContainer";
 import { IconContainer } from "../display/IconContainer";
 import { WinContainer } from "../display/WinContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
@@ -137,7 +137,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						</div>
 					</div>
 					<FuzzyInput
-						initialData={gods}
+						initialGods={gods}
 						filteredData={selectedGodsIDs}
 						selected={selected}
 						setSelected={setSelected}
@@ -161,15 +161,13 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						}}
 					/>
 
-					<SimpleGodsContainer
-						actualGodName={actualGod.Name}
-						gods={selectedGods}
-					/>
+					<SimpleContainer actualName={actualGod.Name} gods={selectedGods} />
 
 					<WinContainer
 						ref={winRef}
 						win={win}
 						actualGod={actualGod}
+						word="ability"
 						nextGame="Skin"
 						tracker={() => {
 							trackEvent("click-next-ability", {}, "/ability");

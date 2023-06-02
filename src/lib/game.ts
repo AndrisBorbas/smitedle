@@ -9,7 +9,7 @@ import seedrandom from "seedrandom";
  */
 export function getDeterministicRandom(date: Date) {
 	// Testing
-	// date.setHours(date.getHours() - 24);
+	// date.setHours(date.getHours() - 24 * 8);
 	// date.setMinutes(date.getMinutes() + 0);
 
 	const timeZone = "Europe/Budapest";

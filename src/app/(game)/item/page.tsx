@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
+import { ItemGame } from "@/components/games/Item";
 import { siteConfig } from "@/data/site";
-import { loadGods } from "@/lib/smiteApi";
+import { loadItems } from "@/lib/smiteApi";
 
 export const metadata: Metadata = {
 	title: {
@@ -21,6 +22,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ClassicPage() {
-	// const gods = await loadGods();
-	return <section>Still under development, check back later</section>;
+	const items = await loadItems();
+	return <ItemGame items={items} />;
 }

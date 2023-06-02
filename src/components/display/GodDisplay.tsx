@@ -1,3 +1,4 @@
+import { Item } from "@joshmiquel/hirez/@types";
 import { motion } from "framer-motion";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 
@@ -12,8 +13,9 @@ export type GodDisplayProps = {
 };
 
 export type SimpleGodDisplayProps = {
-	god: God;
-	actualGodName: string;
+	god?: God;
+	item?: Item.Base;
+	actualName: string;
 };
 
 function splitTypes(roles: string) {
@@ -65,21 +67,23 @@ function SimpleContainer({ children, correct = false }: ContainerProps) {
 	);
 }
 
-export function SimpleGodDisplay({
+export function SimpleDisplay({
 	god,
-	actualGodName,
+	item,
+	actualName,
 }: SimpleGodDisplayProps) {
 	return (
 		<motion.div initial="initial" animate="show" className="w-max text-base">
-			<SimpleContainer correct={god.Name === actualGodName}>
+			<SimpleContainer
+				correct={god?.Name === actualName || item?.DeviceName === actualName}
+			>
 				<IconContainer
-					src={god.godIcon_URL}
-					alt={`${god.Name} icon`}
+					src={god?.godIcon_URL ?? item?.itemIcon_URL ?? ""}
+					alt={`${god?.Name ?? item?.DeviceName} icon`}
 					width={80 - 2}
 					height={80 - 2}
 				/>
-
-				{god.Name}
+				{god?.Name ?? item?.DeviceName}
 			</SimpleContainer>
 		</motion.div>
 	);
