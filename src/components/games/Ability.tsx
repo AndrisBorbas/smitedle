@@ -19,7 +19,7 @@ export type AbilityGameProps = {
 };
 
 export function AbilityGame({ gods }: AbilityGameProps) {
-	const random = getDeterministicRandom(new Date());
+	const random = getDeterministicRandom(new Date(), "ability");
 	const [uiRandom] = useState(Math.random());
 	// Has to be before random god selection
 	const [actualAbility] = useState<1 | 2 | 3 | 4 | 5>(

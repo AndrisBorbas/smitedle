@@ -19,7 +19,7 @@ export type ItemGameProps = {
 };
 
 export function ItemGame({ items }: ItemGameProps) {
-	const random = getDeterministicRandom(new Date());
+	const random = getDeterministicRandom(new Date(), "item");
 	const [actualItem] = useState(items[Math.floor(random() * items.length)]);
 
 	const [actual, setActual] = useLocalStorage("item", -1);

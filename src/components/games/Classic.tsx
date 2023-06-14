@@ -18,7 +18,7 @@ export type ClassicGameProps = {
 };
 
 export function ClassicGame({ gods }: ClassicGameProps) {
-	const random = getDeterministicRandom(new Date());
+	const random = getDeterministicRandom(new Date(), "classic");
 	const [actualGod] = useState(gods[Math.floor(random() * gods.length)]);
 	const [actualGodId, setActualGodId] = useLocalStorage("classic", -1);
 

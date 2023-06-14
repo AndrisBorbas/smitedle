@@ -6,8 +6,9 @@ import seedrandom from "seedrandom";
  * Calling the return value generates the next random number, so only call it when you want a new number.
  *
  * @param date The date to use for the random number generation, should be the current date
+ * @param seedExtra Extra seed to add to the date, for example the path of the current page
  */
-export function getDeterministicRandom(date: Date) {
+export function getDeterministicRandom(date: Date, seedExtra = "") {
 	// Testing
 	// date.setHours(date.getHours() - 24 * 8);
 	// date.setMinutes(date.getMinutes() + 0);
@@ -20,7 +21,7 @@ export function getDeterministicRandom(date: Date) {
 		calendar: "gregory",
 	});
 
-	return seedrandom(currentDate);
+	return seedrandom(currentDate + seedExtra);
 }
 
 export function getTargetDate(now = new Date()) {
