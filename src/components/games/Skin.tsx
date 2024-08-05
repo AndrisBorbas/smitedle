@@ -135,7 +135,9 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						setSelected={setSelected}
 						disabled={win}
 						submit={() => {
-							const god = gods.find((g) => g.Name === selected);
+							const god = gods.find(
+								(g) => g.Name.toLowerCase() === selected.toLowerCase(),
+							);
 							if (!god || selectedGods.includes(god)) {
 								return false;
 							}

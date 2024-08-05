@@ -1,7 +1,7 @@
 {
 	"name": "smitedle",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"packageManager": "pnpm@8.3.1",
 	"scripts": {
 		"build": "run-s build:createSession build:next",
@@ -29,6 +29,7 @@
 		"@tsconfig/next": "^1.0.5",
 		"autoprefixer": "^10.4.14",
 		"clsx": "^1.2.1",
+		"dotenv": "^16.4.5",
 		"framer-motion": "^10.12.16",
 		"fuzzyjs": "^5.0.1",
 		"hirez.js": "^2.0.1",

@@ -110,7 +110,9 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 						setSelected={setSelected}
 						disabled={win}
 						submit={() => {
-							const god = gods.find((g) => g.Name === selected);
+							const god = gods.find(
+								(g) => g.Name.toLowerCase() === selected.toLowerCase(),
+							);
 							if (!god || selectedGods.includes(god)) {
 								return false;
 							}

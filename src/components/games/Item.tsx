@@ -133,7 +133,8 @@ export function ItemGame({ items }: ItemGameProps) {
 						showIcon={false}
 						submit={() => {
 							const item = items.find(
-								({ DeviceName }) => DeviceName === selected,
+								({ DeviceName }) =>
+									DeviceName.toLowerCase() === selected.toLowerCase(),
 							);
 							if (!item || selectedItems.includes(item)) {
 								return false;

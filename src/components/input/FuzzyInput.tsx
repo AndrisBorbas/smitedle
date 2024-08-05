@@ -100,6 +100,17 @@ export function FuzzyInput({
 					}}
 					onFocus={() => setIsFocused.setTrue()}
 					onBlur={() => setIsFocused.setFalse()}
+					onKeyUp={(e) => {
+						if (e.key === "Enter") {
+							if (!submit()) {
+								setShowImmune.setTrue();
+								setTimeout(() => setShowImmune.setFalse(), 700);
+							} else {
+								setSelected("");
+								searchItem("");
+							}
+						}
+					}}
 					value={selected}
 					disabled={disabled}
 				/>
@@ -112,8 +123,10 @@ export function FuzzyInput({
 							if (!submit()) {
 								setShowImmune.setTrue();
 								setTimeout(() => setShowImmune.setFalse(), 700);
+							} else {
+								setSelected("");
+								searchItem("");
 							}
-							setSelected("");
 						}}
 					>
 						<BsArrowReturnLeft />
