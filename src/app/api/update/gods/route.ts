@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { siteConfig } from "@/data/site";
-import { getGods, save, trimGods } from "@/lib/smiteApi";
+import { exportGods, getGods, save, trimGods } from "@/lib/smiteApi";
 import { dlog } from "@/lib/utils";
 
 export async function GET() {
@@ -14,6 +14,7 @@ export async function GET() {
 	save(rawGods, "rawGods");
 	const gods = trimGods(rawGods);
 	save(gods, "gods");
+	exportGods(gods);
 
 	dlog("Gods updated");
 

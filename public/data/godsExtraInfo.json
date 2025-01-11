@@ -120,6 +120,12 @@
 		"ReleaseYear": 2012
 	},
 	{
+		"Name": "Bake Kujira",
+		"Gender": "Male",
+		"Position": "Support, Solo",
+		"ReleaseYear": 2023
+	},
+	{
 		"Name": "Baron Samedi",
 		"Gender": "Male",
 		"Position": "Support, Solo, Mid",
@@ -172,6 +178,12 @@
 		"Gender": "Female",
 		"Position": "Mid, Solo",
 		"ReleaseYear": 2013
+	},
+	{
+		"Name": "Charon",
+		"Gender": "Male",
+		"Position": "Support",
+		"ReleaseYear": 2023
 	},
 	{
 		"Name": "Charybdis",
@@ -360,6 +372,12 @@
 		"ReleaseYear": 2022
 	},
 	{
+		"Name": "Ix Chel",
+		"Gender": "Female",
+		"Position": "Mid",
+		"ReleaseYear": 2023
+	},
+	{
 		"Name": "Izanami",
 		"Gender": "Female",
 		"Position": "Carry",
@@ -371,7 +389,12 @@
 		"Position": "Mid",
 		"ReleaseYear": 2023
 	},
-	{ "Name": "Janus", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2014 },
+	{
+		"Name": "Janus",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2014
+	},
 	{
 		"Name": "Jing Wei",
 		"Gender": "Female",
@@ -431,6 +454,12 @@
 		"Gender": "Male",
 		"Position": "Jungle, Solo",
 		"ReleaseYear": 2012
+	},
+	{
+		"Name": "Maman Brigitte",
+		"Gender": "Female",
+		"Position": "Jungle",
+		"ReleaseYear": 2023
 	},
 	{
 		"Name": "Martichoras",
@@ -511,6 +540,12 @@
 		"ReleaseYear": 2013
 	},
 	{
+		"Name": "Nut",
+		"Gender": "Female",
+		"Position": "Carry",
+		"ReleaseYear": 2024
+	},
+	{
 		"Name": "Odin",
 		"Gender": "Male",
 		"Position": "Solo, Support",
@@ -546,7 +581,12 @@
 		"Position": "Mid, Jungle",
 		"ReleaseYear": 2013
 	},
-	{ "Name": "Ra", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2012 },
+	{
+		"Name": "Ra",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2012
+	},
 	{
 		"Name": "Raijin",
 		"Gender": "Male",
@@ -661,7 +701,12 @@
 		"Position": "Jungle",
 		"ReleaseYear": 2012
 	},
-	{ "Name": "Thoth", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2016 },
+	{
+		"Name": "Thoth",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2016
+	},
 	{
 		"Name": "Tiamat",
 		"Gender": "Female",
@@ -674,7 +719,12 @@
 		"Position": "Jungle",
 		"ReleaseYear": 2020
 	},
-	{ "Name": "Tyr", "Gender": "Male", "Position": "Solo", "ReleaseYear": 2013 },
+	{
+		"Name": "Tyr",
+		"Gender": "Male",
+		"Position": "Solo",
+		"ReleaseYear": 2013
+	},
 	{
 		"Name": "Ullr",
 		"Gender": "Male",
@@ -723,7 +773,12 @@
 		"Position": "Mid",
 		"ReleaseYear": 2022
 	},
-	{ "Name": "Zeus", "Gender": "Male", "Position": "Mid", "ReleaseYear": 2012 },
+	{
+		"Name": "Zeus",
+		"Gender": "Male",
+		"Position": "Mid",
+		"ReleaseYear": 2012
+	},
 	{
 		"Name": "Zhong Kui",
 		"Gender": "Male",
