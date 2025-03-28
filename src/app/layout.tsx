@@ -65,14 +65,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		<html lang="en" className="bg-slate-950 font-sans text-white antialiased">
 			<head />
 
-			<PlausibleProvider
-				domain="smitedle.net"
-				selfHosted
-				customDomain="https://succ.andrisborbas.com"
-				trackOutboundLinks
-				taggedEvents
-			>
-				<body className="relative flex min-h-screen flex-col before:absolute before:inset-0 before:-z-50 before:bg-smite before:bg-cover before:bg-fixed before:bg-top before:bg-no-repeat before:opacity-25 before:content-['']">
+			<body className="relative flex min-h-screen flex-col before:absolute before:inset-0 before:-z-50 before:bg-smite before:bg-cover before:bg-fixed before:bg-top before:bg-no-repeat before:opacity-25 before:content-['']">
+				<PlausibleProvider
+					domain="smitedle.net"
+					selfHosted
+					customDomain="https://succ.andrisborbas.com"
+					trackOutboundLinks
+					taggedEvents
+				>
 					<div className="fixed left-[-75px] top-[25px] z-50 w-72 rotate-[-30deg] bg-accent/25 py-2 text-center backdrop-blur">
 						<div className="bg-black/25 text-white">Under construction</div>
 					</div>
@@ -80,8 +80,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					<main className={cn("my-8 sm:my-16")}>{children}</main>
 
 					<Footer buildDate={Date.now()} />
-				</body>
-			</PlausibleProvider>
+				</PlausibleProvider>
+			</body>
 		</html>
 	);
 }
