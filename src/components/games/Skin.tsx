@@ -1,12 +1,12 @@
 "use client";
 
 import { Skin } from "@joshmiquel/hirez/@types";
+import { usePlausible } from "next-plausible";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
-import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
 import { SimpleContainer } from "../display/GodsContainer";
@@ -22,6 +22,7 @@ export type SkinGameProps = {
 
 export function SkinGame({ gods, skins }: SkinGameProps) {
 	const random = getDeterministicRandom(new Date(), "skin");
+	const plausible = usePlausible();
 	const [actualSkin] = useState(skins[Math.floor(random() * skins.length)]);
 	const actualGod = useMemo(() => {
 		return gods.find((god) => god.id === actualSkin.god_id);
@@ -149,7 +150,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-skin", { guesses }, "/skin");
+								plausible("win-skin", { props: { guesses } });
 							}
 							return true;
 						}}
@@ -167,7 +168,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						word="skin"
 						nextGame="Item"
 						tracker={() => {
-							trackEvent("click-next-skin", {}, "/skin");
+							plausible("click-next-skin");
 						}}
 					/>
 				</>

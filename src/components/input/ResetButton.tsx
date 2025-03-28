@@ -1,13 +1,14 @@
 "use client";
 
+import { usePlausible } from "next-plausible";
 import { useState } from "react";
 import { TbRefreshAlert } from "react-icons/tb";
 
-import { trackEvent } from "@/lib/track";
 import { cn } from "@/lib/utils";
 
 export function ResetButton() {
 	const [clicks, setClicks] = useState(0);
+	const plausible = usePlausible();
 
 	return (
 		<div className="fixed right-2 top-2 z-40">
@@ -30,7 +31,7 @@ export function ResetButton() {
 						return;
 					}
 					setClicks(0);
-					trackEvent("click-reset", {}, window.location.pathname);
+					plausible("click-reset");
 					localStorage.clear();
 					window.location.reload();
 				}}

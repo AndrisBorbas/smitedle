@@ -20,5 +20,3 @@ export const siteConfig: SiteConfig = {
 		github: "https://github.com/andrisborbas/smitedle",
 	},
 };
-
-export const TRACKING_ID = "66f31499-00e1-4182-9336-e0feba9afdbb";

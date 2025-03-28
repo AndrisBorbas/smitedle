@@ -1,5 +1,6 @@
 import withBundleAnalyzer from "@next/bundle-analyzer";
 import withPlugins from "next-compose-plugins";
+import { withPlausibleProxy } from "next-plausible";
 import withPWA from "next-pwa";
 
 /** @type {import("next").NextConfig} */
@@ -43,6 +44,12 @@ const nextConfig = {
 
 export default withPlugins(
 	[
+		[
+			withPlausibleProxy({
+				customDomain: "https://succ.andrisborbas.com",
+				scriptName: "succ",
+			}),
+		],
 		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
 		[
 			withPWA,

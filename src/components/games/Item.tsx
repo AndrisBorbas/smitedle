@@ -1,11 +1,11 @@
 "use client";
 
 import { Item } from "@joshmiquel/hirez/@types";
+import { usePlausible } from "next-plausible";
 import { useEffect, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
-import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
 import { SimpleContainer } from "../display/GodsContainer";
@@ -20,6 +20,7 @@ export type ItemGameProps = {
 
 export function ItemGame({ items }: ItemGameProps) {
 	const random = getDeterministicRandom(new Date(), "item");
+	const plausible = usePlausible();
 	const [actualItem] = useState(items[Math.floor(random() * items.length)]);
 
 	const [actual, setActual] = useLocalStorage("item", -1);
@@ -147,7 +148,7 @@ export function ItemGame({ items }: ItemGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-item", { guesses }, "/item");
+								plausible("win-item", { props: { guesses } });
 							}
 							return true;
 						}}
@@ -165,7 +166,7 @@ export function ItemGame({ items }: ItemGameProps) {
 						word="item"
 						nextGame="Promo"
 						tracker={() => {
-							trackEvent("click-next-last", {}, "/item");
+							plausible("click-next-last");
 						}}
 					/>
 				</>

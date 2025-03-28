@@ -1,11 +1,11 @@
 "use client";
 
+import { usePlausible } from "next-plausible";
 import { useEffect, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
-import { trackEvent } from "@/lib/track";
 import { dlog } from "@/lib/utils";
 
 import { DetailedGodsContainer } from "../display/GodsContainer";
@@ -19,6 +19,7 @@ export type ClassicGameProps = {
 
 export function ClassicGame({ gods }: ClassicGameProps) {
 	const random = getDeterministicRandom(new Date(), "classic");
+	const plausible = usePlausible();
 	const [actualGod] = useState(gods[Math.floor(random() * gods.length)]);
 	const [actualGodId, setActualGodId] = useLocalStorage("classic", -1);
 
@@ -124,7 +125,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 9 + 300);
-								trackEvent("win-classic", { guesses }, "/classic");
+								plausible("win-classic", { props: { guesses } });
 							}
 							return true;
 						}}
@@ -139,7 +140,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 						word="god"
 						nextGame="Ability"
 						tracker={() => {
-							trackEvent("click-next-classic", {}, "/classic");
+							plausible("click-next-classic");
 						}}
 					/>
 				</>

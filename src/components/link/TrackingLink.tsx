@@ -1,8 +1,7 @@
 "use client";
 
 import Link, { LinkProps } from "next/link";
-
-import { trackEvent } from "@/lib/track";
+import { usePlausible } from "next-plausible";
 
 type TrackingLinkProps = {
 	isExternal?: boolean;
@@ -22,13 +21,15 @@ export function TrackingLink({
 	children,
 	...restProps
 }: TrackingLinkProps) {
+	const plausible = usePlausible();
+
 	return (
 		<>
 			{isExternal && (
 				<a
 					href={href}
 					onClick={(e) => {
-						trackEvent(eventName, { link: href, ...eventData });
+						plausible(eventName, { props: { link: href, ...eventData } });
 						onClick?.(e);
 					}}
 					{...restProps}
@@ -40,7 +41,7 @@ export function TrackingLink({
 				<Link
 					href={href}
 					onClick={(e) => {
-						trackEvent(eventName, { link: href, ...eventData });
+						plausible(eventName, { props: { link: href, ...eventData } });
 						onClick?.(e);
 					}}
 					{...restProps}
