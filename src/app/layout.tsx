@@ -69,7 +69,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				async
 				defer
 				data-website-id={TRACKING_ID}
-				src="https://succ.andrisborbas.com/script.js"
+				src="https://succ.andrisborbas.com/succ.js"
 				data-auto-track={
 					process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "true" : "false"
 				}
