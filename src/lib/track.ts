@@ -1,6 +1,6 @@
-import { dlog } from "./utils";
+import { TRACKING_ID } from "@/data/site";
 
-export const TRACKING_ID = "66f31499-00e1-4182-9336-e0feba9afdbb";
+import { dlog } from "./utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const assign = (a: any, b: any) => {
