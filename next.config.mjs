@@ -47,7 +47,7 @@ export default withPlugins(
 		[
 			withPlausibleProxy({
 				customDomain: "https://succ.andrisborbas.com",
-				// scriptName: "succ",
+				scriptName: "succ",
 			}),
 		],
 		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
