@@ -1,11 +1,11 @@
 "use client";
 
-import { usePlausible } from "next-plausible";
 import { useEffect, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
 import { Gods } from "@/lib/smiteApi";
+import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
 import { SimpleContainer } from "../display/GodsContainer";
@@ -20,7 +20,6 @@ export type AbilityGameProps = {
 
 export function AbilityGame({ gods }: AbilityGameProps) {
 	const random = getDeterministicRandom(new Date(), "ability");
-	const plausible = usePlausible();
 	const [uiRandom] = useState(Math.random());
 	// Has to be before random god selection
 	const [actualAbility] = useState<1 | 2 | 3 | 4 | 5>(
@@ -158,7 +157,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								plausible("win-ability", { props: { guesses } });
+								trackEvent("win-ability", { guesses }, "/ability");
 							}
 							return true;
 						}}
@@ -173,7 +172,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						word="ability"
 						nextGame="Skin"
 						tracker={() => {
-							plausible("click-next-ability");
+							trackEvent("click-next-ability", {}, "/ability");
 						}}
 					/>
 				</>
