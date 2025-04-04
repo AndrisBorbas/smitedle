@@ -62,7 +62,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" className="bg-slate-950 font-sans text-white antialiased">
-			<head />
+			<head>
+				<meta name="darkreader-lock" />
+			</head>
 
 			{/* Umami analytics */}
 			<Script
