@@ -22,7 +22,9 @@ export type SkinGameProps = {
 
 export function SkinGame({ gods, skins }: SkinGameProps) {
 	const random = getDeterministicRandom(new Date(), "skin");
-	const [actualSkin] = useState(skins[Math.floor(random() * skins.length)]);
+	const [actualSkin, setActualSkin] = useState(
+		skins[Math.floor(random() * skins.length)],
+	);
 	const actualGod = useMemo(() => {
 		return gods.find((god) => god.id === actualSkin.god_id);
 	}, [actualSkin, gods]);
@@ -77,6 +79,13 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 			winRef.current?.scrollIntoView({ behavior: "smooth" });
 		}
 	}, [win]);
+
+	useEffect(() => {
+		if (!actualSkin.godSkin_URL) {
+			const newSkin = skins[Math.floor(random() * skins.length)];
+			setActualSkin(newSkin);
+		}
+	}, [actualSkin]);
 
 	// Set loaded after gods are loaded from local storage
 	useEffect(() => {
