@@ -147,7 +147,7 @@ export function ItemGame({ items }: ItemGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-item", { guesses }, "/item");
+								trackEvent("Win_Item", { guesses }, "/item");
 							}
 							return true;
 						}}
@@ -165,7 +165,7 @@ export function ItemGame({ items }: ItemGameProps) {
 						word="item"
 						nextGame="Promo"
 						tracker={() => {
-							trackEvent("click-next-last", {}, "/item");
+							trackEvent("Click_Next_Last", {}, "/item");
 						}}
 					/>
 				</>

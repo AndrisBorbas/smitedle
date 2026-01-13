@@ -157,7 +157,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-ability", { guesses }, "/ability");
+								trackEvent("Win_Ability", { guesses }, "/ability");
 							}
 							return true;
 						}}
@@ -172,7 +172,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						word="ability"
 						nextGame="Skin"
 						tracker={() => {
-							trackEvent("click-next-ability", {}, "/ability");
+							trackEvent("Click_Next_Ability", {}, "/ability");
 						}}
 					/>
 				</>

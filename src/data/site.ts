@@ -21,4 +21,4 @@ export const siteConfig: SiteConfig = {
 	},
 };
 
-export const TRACKING_ID = "2b4822d2-93c6-4e6e-9158-6706a411fa9b";
+export const TRACKING_ID = "SqANPGtDvDE4";

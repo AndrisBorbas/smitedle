@@ -24,7 +24,7 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
 						href="https://ko-fi.com/andrisborbas"
 						isExternal
 						target="_blank"
-						eventName="click-layout-kofi"
+						eventName="Click_Layout_Kofi"
 						className="group whitespace-nowrap break-keep"
 					>
 						<span className="group-hover:text-glow underline transition-all group-hover:decoration-accent group-hover:underline-offset-2">
@@ -39,7 +39,7 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
 						href="https://github.com/andrisborbas/smitedle/issues"
 						isExternal
 						target="_blank"
-						eventName="click-layout-bugs"
+						eventName="Click_Layout_Bugs"
 						className="group whitespace-nowrap break-keep"
 					>
 						<span className="group-hover:text-glow underline transition-all group-hover:decoration-accent group-hover:underline-offset-2">

@@ -158,7 +158,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 1 + 300);
-								trackEvent("win-skin", { guesses }, "/skin");
+								trackEvent("Win_Skin", { guesses }, "/skin");
 							}
 							return true;
 						}}
@@ -176,7 +176,7 @@ export function SkinGame({ gods, skins }: SkinGameProps) {
 						word="skin"
 						nextGame="Item"
 						tracker={() => {
-							trackEvent("click-next-skin", {}, "/skin");
+							trackEvent("Click_Next_Skin", {}, "/skin");
 						}}
 					/>
 				</>

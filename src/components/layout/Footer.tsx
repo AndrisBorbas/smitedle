@@ -34,7 +34,7 @@ export function Footer({ buildDate }: FooterProps) {
 						rel="noopener noreferrer"
 						aria-label="GitHub link"
 						isExternal
-						eventName="footer-version-click"
+						eventName="Footer_Version_Click"
 						eventData={{ site: "GitHub" }}
 					>
 						v{manifest.version}.{buildDateString} &copy;&nbsp;

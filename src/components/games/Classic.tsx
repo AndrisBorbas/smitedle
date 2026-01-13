@@ -124,7 +124,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 								setTimeout(() => {
 									setWin(true);
 								}, 150 * 9 + 300);
-								trackEvent("win-classic", { guesses }, "/classic");
+								trackEvent("Win_Classic", { guesses }, "/classic");
 							}
 							return true;
 						}}
@@ -139,7 +139,7 @@ export function ClassicGame({ gods }: ClassicGameProps) {
 						word="god"
 						nextGame="Ability"
 						tracker={() => {
-							trackEvent("click-next-classic", {}, "/classic");
+							trackEvent("Click_Next_Classic", {}, "/classic");
 						}}
 					/>
 				</>

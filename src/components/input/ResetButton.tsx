@@ -30,7 +30,7 @@ export function ResetButton() {
 						return;
 					}
 					setClicks(0);
-					trackEvent("click-reset", {}, window.location.pathname);
+					trackEvent("Click_Reset", {}, window.location.pathname);
 					localStorage.clear();
 					window.location.reload();
 				}}
