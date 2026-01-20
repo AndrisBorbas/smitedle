@@ -1,5 +1,5 @@
 import { Item } from "@joshmiquel/hirez/@types";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 
 import { God } from "@/lib/smiteApi";
 import { cn } from "@/lib/utils";
@@ -15,18 +15,37 @@ export type WinContainerProps = {
 	nextGame: "Promo" | string;
 	tracker: () => void;
 	word: string;
+	showMiniGame?: boolean;
+	MiniGame?: React.ReactElement;
+	ExtraInfo?: React.ReactElement;
 };
 
 export const WinContainer = forwardRef<HTMLDivElement, WinContainerProps>(
-	({ win, actualGod, actualItem, nextGame, word, tracker }, ref) => {
+	(
+		{
+			win,
+			actualGod,
+			actualItem,
+			nextGame,
+			word,
+			showMiniGame,
+			MiniGame,
+			ExtraInfo,
+			tracker,
+		},
+		ref,
+	) => {
 		return (
 			<div
 				ref={ref}
 				className={cn(
-					"mx-auto mt-8 flex w-[20rem] flex-col items-center border border-accent bg-white/5 p-8 backdrop-blur",
-					win ? "flex" : "hidden",
+					"mx-auto mt-8 flex w-fit flex-col items-center border border-accent bg-white/5 p-8 backdrop-blur",
+					win || showMiniGame ? "flex" : "hidden",
 				)}
 			>
+				{showMiniGame && MiniGame && (
+					<section className="mb-8 w-full">{MiniGame}</section>
+				)}
 				{win && (
 					<>
 						<h3 className="text-glow mb-4">You won! 🏆</h3>
@@ -46,6 +65,7 @@ export const WinContainer = forwardRef<HTMLDivElement, WinContainerProps>(
 							height={335}
 							anim
 						/>
+						{ExtraInfo && <div className="mt-8">{ExtraInfo}</div>}
 						<div className="mt-8">
 							<Timer word={word} />
 						</div>

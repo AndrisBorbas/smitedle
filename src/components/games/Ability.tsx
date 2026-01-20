@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
-import { Gods } from "@/lib/smiteApi";
+import { God, Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
@@ -12,11 +12,106 @@ import { SimpleContainer } from "../display/GodsContainer";
 import { IconContainer } from "../display/IconContainer";
 import { WinContainer } from "../display/WinContainer";
 import { FuzzyInput } from "../input/FuzzyInput";
+import styles from "../input/FuzzyInput.module.scss";
 import { Loading } from "../layout/Loading";
 
 export type AbilityGameProps = {
 	gods: Gods;
 };
+
+const abilityNames = ["Passive", "1", "2", "3", "Ultimate"];
+
+type AbilityButtonProps = {
+	actualAbility: 1 | 2 | 3 | 4 | 5;
+	abilityName: string;
+	index: number;
+	setSelected: (value: number[]) => void;
+	selected: number[];
+	onWin: () => void;
+};
+
+function AbilityButton({
+	actualAbility,
+	abilityName,
+	index,
+	setSelected,
+	selected,
+	onWin,
+}: AbilityButtonProps) {
+	const [showImmune, setShowImmune] = useState(false);
+	return (
+		<div className="relative">
+			<button
+				key={abilityName}
+				type="button"
+				onClick={() => {
+					if (!selected.includes(index)) {
+						setSelected([...selected, index]);
+						if (actualAbility === index) {
+							onWin();
+						} else {
+							setShowImmune(true);
+							setTimeout(() => {
+								setShowImmune(false);
+							}, 700);
+						}
+					}
+				}}
+				disabled={selected.includes(index) && actualAbility !== index}
+				className={cn(
+					"fancyButton h-16 w-fit cursor-pointer border-2 border-accent bg-white/5 p-4 px-6 text-lg font-semibold tabular-nums text-accent ring-accent backdrop-blur hover:bg-white/20 hover:text-white hover:ring-1 disabled:cursor-not-allowed",
+					actualAbility === index &&
+						selected.includes(index) &&
+						"bg-green-600/25 text-white",
+					actualAbility !== index &&
+						selected.includes(index) &&
+						"bg-red-600/25",
+				)}
+			>
+				{abilityNames[index]}
+			</button>
+			<div
+				className={cn(
+					styles["animate-float-fade"],
+					"pointer-events-none absolute inset-x-0 -top-8 z-30 select-none text-center font-serif font-bold text-yellow-300",
+					showImmune ? "block" : "hidden",
+				)}
+				aria-hidden="true"
+				draggable={false}
+			>
+				*Immune*
+			</div>
+		</div>
+	);
+}
+
+type WhichAbilityGameProps = {
+	actualAbility: 1 | 2 | 3 | 4 | 5;
+	onWin: () => void;
+};
+
+function WhichAbilityGame({ actualAbility, onWin }: WhichAbilityGameProps) {
+	const [selected, setSelected] = useState<number[]>([]);
+
+	return (
+		<>
+			<h3 className="mb-4">Which ability is this?</h3>
+			<div className="mx-auto flex w-max flex-row gap-2">
+				{abilityNames.map((abilityName, index) => (
+					<AbilityButton
+						key={abilityName}
+						actualAbility={actualAbility}
+						index={index}
+						setSelected={setSelected}
+						selected={selected}
+						abilityName={abilityName}
+						onWin={onWin}
+					/>
+				))}
+			</div>
+		</>
+	);
+}
 
 export function AbilityGame({ gods }: AbilityGameProps) {
 	const random = getDeterministicRandom(new Date(), "ability");
@@ -34,6 +129,10 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 	const [loaded, setLoaded] = useBool(false);
 
 	const [win, setWin] = useLocalStorage("abilityWin", false);
+	const [miniGameWin, setMiniGameWin] = useLocalStorage(
+		"abilityMiniGameWin",
+		false,
+	);
 	const [guesses, setGuesses] = useState(0);
 
 	const [selected, setSelected] = useLocalStorage("abilitySelectedValue", "");
@@ -65,6 +164,8 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 			setSelectedGodsIDs([]);
 			window.localStorage.removeItem("abilityWin");
 			setWin(false);
+			window.localStorage.removeItem("abilityMiniGameWin");
+			setMiniGameWin(false);
 			setGuesses(0);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -167,10 +268,29 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 
 					<WinContainer
 						ref={winRef}
-						win={win}
+						win={miniGameWin}
 						actualGod={actualGod}
 						word="ability"
 						nextGame="Skin"
+						showMiniGame={win}
+						MiniGame={
+							<WhichAbilityGame
+								actualAbility={actualAbility}
+								onWin={() => {
+									setTimeout(() => {
+										setMiniGameWin(true);
+									});
+								}}
+							/>
+						}
+						ExtraInfo={
+							<h4 className="">
+								The ability was:{" "}
+								<span className="font-bold">
+									{actualGod[`Ability${actualAbility}`]}
+								</span>
+							</h4>
+						}
 						tracker={() => {
 							trackEvent("Click_Next_Ability", {}, "/ability");
 						}}
