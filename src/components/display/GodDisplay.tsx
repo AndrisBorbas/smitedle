@@ -15,6 +15,7 @@ export type GodDisplayProps = {
 export type SimpleGodDisplayProps = {
 	god?: God;
 	item?: Item.Base;
+	data?: { id: number; name: string };
 	actualName: string;
 };
 
@@ -40,9 +41,10 @@ function checkSet(a: string[], b: string[]) {
 type ContainerProps = {
 	children: React.ReactNode;
 	correct?: Correctness;
+	small?: boolean;
 };
 
-function SimpleContainer({ children, correct = false }: ContainerProps) {
+function SimpleContainer({ children, small, correct = false }: ContainerProps) {
 	let bgColor = "bg-red-600/25";
 
 	if (correct === "partial") {
@@ -58,7 +60,8 @@ function SimpleContainer({ children, correct = false }: ContainerProps) {
 			<div
 				className={cn(
 					bgColor,
-					"relative flex w-[20rem] flex-row items-center gap-4 border border-accent p-4 backdrop-blur",
+					small ? "w-[16rem]" : "w-[20rem]",
+					"relative flex flex-row items-center gap-4 border border-accent p-4 backdrop-blur",
 				)}
 			>
 				{children}
@@ -70,20 +73,28 @@ function SimpleContainer({ children, correct = false }: ContainerProps) {
 export function SimpleDisplay({
 	god,
 	item,
+	data,
 	actualName,
 }: SimpleGodDisplayProps) {
 	return (
 		<motion.div initial="initial" animate="show" className="w-max text-base">
 			<SimpleContainer
-				correct={god?.Name === actualName || item?.DeviceName === actualName}
+				small={data !== undefined}
+				correct={
+					god?.Name === actualName ||
+					item?.DeviceName === actualName ||
+					data?.name === actualName
+				}
 			>
-				<IconContainer
-					src={god?.godIcon_URL ?? item?.itemIcon_URL ?? ""}
-					alt={`${god?.Name ?? item?.DeviceName} icon`}
-					width={80 - 2}
-					height={80 - 2}
-				/>
-				{god?.Name ?? item?.DeviceName}
+				{!data && (
+					<IconContainer
+						src={god?.godIcon_URL ?? item?.itemIcon_URL ?? ""}
+						alt={`${god?.Name ?? item?.DeviceName} icon`}
+						width={80 - 2}
+						height={80 - 2}
+					/>
+				)}
+				{god?.Name ?? item?.DeviceName ?? data?.name}
 			</SimpleContainer>
 		</motion.div>
 	);

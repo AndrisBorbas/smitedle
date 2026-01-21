@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { getDeterministicRandom } from "@/lib/game";
 import { useBool, useLocalStorage } from "@/lib/hooks";
-import { God, Gods } from "@/lib/smiteApi";
+import { Gods } from "@/lib/smiteApi";
 import { trackEvent } from "@/lib/track";
 import { cn, dlog } from "@/lib/utils";
 
@@ -15,10 +15,6 @@ import { FuzzyInput } from "../input/FuzzyInput";
 import styles from "../input/FuzzyInput.module.scss";
 import { Loading } from "../layout/Loading";
 
-export type AbilityGameProps = {
-	gods: Gods;
-};
-
 const abilityNames = ["Passive", "1", "2", "3", "Ultimate"];
 
 type AbilityButtonProps = {
@@ -27,7 +23,9 @@ type AbilityButtonProps = {
 	index: number;
 	setSelected: (value: number[]) => void;
 	selected: number[];
+	className?: string;
 	onWin: () => void;
+	win: boolean;
 };
 
 function AbilityButton({
@@ -36,28 +34,30 @@ function AbilityButton({
 	index,
 	setSelected,
 	selected,
+	className,
 	onWin,
+	win,
 }: AbilityButtonProps) {
 	const [showImmune, setShowImmune] = useState(false);
 	return (
-		<div className="relative">
+		<div className={cn("relative", className)}>
 			<button
 				key={abilityName}
 				type="button"
 				onClick={() => {
-					if (!selected.includes(index)) {
+					if (!selected.includes(index) && !win) {
 						setSelected([...selected, index]);
-						if (actualAbility === index) {
-							onWin();
-						} else {
-							setShowImmune(true);
-							setTimeout(() => {
-								setShowImmune(false);
-							}, 700);
-						}
+					}
+					if (actualAbility === index) {
+						onWin();
+					} else {
+						setShowImmune(true);
+						setTimeout(() => {
+							setShowImmune(false);
+						}, 700);
 					}
 				}}
-				disabled={selected.includes(index) && actualAbility !== index}
+				disabled={false}
 				className={cn(
 					"fancyButton h-16 w-fit cursor-pointer border-2 border-accent bg-white/5 p-4 px-6 text-lg font-semibold tabular-nums text-accent ring-accent backdrop-blur hover:bg-white/20 hover:text-white hover:ring-1 disabled:cursor-not-allowed",
 					actualAbility === index &&
@@ -87,16 +87,35 @@ function AbilityButton({
 
 type WhichAbilityGameProps = {
 	actualAbility: 1 | 2 | 3 | 4 | 5;
+	actual: { god: number; ability: number };
 	onWin: () => void;
+	win: boolean;
 };
 
-function WhichAbilityGame({ actualAbility, onWin }: WhichAbilityGameProps) {
-	const [selected, setSelected] = useState<number[]>([]);
+function WhichAbilityGame({
+	actualAbility,
+	actual,
+	win,
+	onWin,
+}: WhichAbilityGameProps) {
+	const [selected, setSelected] = useLocalStorage<number[]>(
+		"abilityMiniGameSelectedValue",
+		[],
+	);
+
+	// Reset game current if god changes
+	useEffect(() => {
+		if (actual.god !== -1 && actualAbility !== actual.ability) {
+			window.localStorage.removeItem("abilityMiniGameSelectedValue");
+			setSelected([]);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [actualAbility, actual.god]);
 
 	return (
 		<>
 			<h3 className="mb-4">Which ability is this?</h3>
-			<div className="mx-auto flex w-max flex-row gap-2">
+			<div className="mx-auto grid w-max grid-cols-3 gap-2">
 				{abilityNames.map((abilityName, index) => (
 					<AbilityButton
 						key={abilityName}
@@ -106,12 +125,18 @@ function WhichAbilityGame({ actualAbility, onWin }: WhichAbilityGameProps) {
 						selected={selected}
 						abilityName={abilityName}
 						onWin={onWin}
+						win={win}
+						className={cn((index === 0 || index === 4) && "col-span-3")}
 					/>
 				))}
 			</div>
 		</>
 	);
 }
+
+export type AbilityGameProps = {
+	gods: Gods;
+};
 
 export function AbilityGame({ gods }: AbilityGameProps) {
 	const random = getDeterministicRandom(new Date(), "ability");
@@ -276,6 +301,8 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						MiniGame={
 							<WhichAbilityGame
 								actualAbility={actualAbility}
+								actual={actual}
+								win={miniGameWin}
 								onWin={() => {
 									setTimeout(() => {
 										setMiniGameWin(true);

@@ -12,6 +12,7 @@ export type GodsContainerProps = {
 export type SimpleGodsContainerProps = {
 	gods?: Gods;
 	items?: Item.Base[];
+	data?: { id: number; name: string }[];
 	actualName: string;
 };
 
@@ -48,6 +49,7 @@ export function DetailedGodsContainer({ gods, actualGod }: GodsContainerProps) {
 export function SimpleContainer({
 	gods,
 	items,
+	data,
 	actualName,
 }: SimpleGodsContainerProps) {
 	return (
@@ -61,6 +63,9 @@ export function SimpleContainer({
 					item={item}
 					actualName={actualName}
 				/>
+			))}
+			{data?.map(({ id, name }) => (
+				<SimpleDisplay key={id} data={{ id, name }} actualName={actualName} />
 			))}
 		</div>
 	);

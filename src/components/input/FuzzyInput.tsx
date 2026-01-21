@@ -2,7 +2,8 @@
 
 import { Item } from "@joshmiquel/hirez/@types";
 import { filter as fuzzyFilter, sort as fuzzySort } from "fuzzyjs";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { BsArrowReturnLeft } from "react-icons/bs";
 
 import { useBool } from "@/lib/hooks";
@@ -15,6 +16,7 @@ import styles from "./FuzzyInput.module.scss";
 export type FuzzyInputProps = {
 	initialGods?: Gods;
 	initialItems?: Item.Base[];
+	initialData?: { id: number; name: string }[];
 	filteredData: number[];
 	// selectionProperty?: "Name" | "DeviceName";
 	selected: string;
@@ -22,24 +24,66 @@ export type FuzzyInputProps = {
 	setSelected: (value: string) => void;
 	submit: () => boolean;
 	showIcon?: boolean;
+	className?: string;
 };
 
 export function FuzzyInput({
 	initialGods,
 	initialItems,
+	initialData,
 	filteredData,
 	// selectionProperty,
 	selected,
 	disabled,
 	setSelected,
 	submit,
+	className,
 	showIcon = true,
 }: FuzzyInputProps) {
 	const [gods, setGods] = useState<Gods>([]);
 	const [items, setItems] = useState<Item.Base[]>([]);
+	const [data, setData] = useState<{ id: number; name: string }[]>([]);
 	const [isFocused, setIsFocused] = useBool(false);
 	const [isHovered, setIsHovered] = useBool(false);
 	const [showImmune, setShowImmune] = useBool(false);
+	const inputContainerRef = useRef<HTMLDivElement>(null);
+	const [dropdownPosition, setDropdownPosition] = useState({
+		top: 0,
+		left: 0,
+		width: 0,
+	});
+
+	const updateDropdownPosition = () => {
+		if (inputContainerRef.current) {
+			const rect = inputContainerRef.current.getBoundingClientRect();
+			setDropdownPosition({
+				top: rect.bottom,
+				left: rect.left + rect.width / 2,
+				width: 320, // w-80 = 20rem = 320px
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (
+			inputContainerRef.current &&
+			(gods.length > 0 || items.length > 0 || data.length > 0)
+		) {
+			updateDropdownPosition();
+		}
+	}, [gods, items, data, isFocused, isHovered]);
+
+	useEffect(() => {
+		if (gods.length > 0 || items.length > 0 || data.length > 0) {
+			window.addEventListener("scroll", updateDropdownPosition, true);
+			window.addEventListener("resize", updateDropdownPosition);
+
+			return () => {
+				window.removeEventListener("scroll", updateDropdownPosition, true);
+				window.removeEventListener("resize", updateDropdownPosition);
+			};
+		}
+	}, [gods.length, items.length, data.length]);
 
 	function searchItem(query: string) {
 		if (!query) {
@@ -82,18 +126,37 @@ export function FuzzyInput({
 			} else {
 				setItems([]);
 			}
+		} else if (initialData) {
+			const filtered = initialData
+				.filter((entry) => !filteredData.some((id) => id === entry.id))
+				.filter(fuzzyFilter(query, { iterator: (entry) => entry.name }));
+			const result = filtered
+				.sort(fuzzySort(query, { iterator: (entry) => entry.name }))
+				.slice(0, 6);
+
+			if (result.length) {
+				setData(result);
+			} else {
+				setData([]);
+			}
 		}
 	}
 
 	return (
 		<>
-			<div className="mx-auto mb-2 flex max-w-[20rem] flex-row justify-center gap-2">
+			<div
+				ref={inputContainerRef}
+				className={cn(
+					"mx-auto mb-2 flex max-w-[20rem] flex-row justify-center gap-2",
+					className,
+				)}
+			>
 				<input
 					className="w-full border-2 border-accent bg-white/5 p-3 px-4 text-lg text-stone-50 backdrop-blur placeholder:text-stone-400 focus:bg-white/20 focus:outline-none focus:ring-1 focus:ring-accent disabled:cursor-not-allowed"
 					type="search"
 					placeholder={`Type ${initialGods ? "a gods" : ""}${
 						initialItems ? "an items" : ""
-					} name...`}
+					}${initialData ? "a" : ""} name...`}
 					onChange={(e) => {
 						setSelected(e.target.value);
 						searchItem(e.target.value);
@@ -144,10 +207,18 @@ export function FuzzyInput({
 					</div>
 				</div>
 			</div>
-			<div className="relative">
-				{(gods.length > 0 || items.length > 0) && (isFocused || isHovered) && (
+			{(gods.length > 0 || items.length > 0 || data.length > 0) &&
+				(isFocused || isHovered) &&
+				typeof document !== "undefined" &&
+				createPortal(
 					<div
-						className="absolute inset-x-0 top-0 z-10 mx-auto flex max-h-80 w-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
+						className="fixed z-50 flex max-h-80 flex-col gap-2 overflow-y-auto bg-white/5 p-2 backdrop-blur"
+						style={{
+							top: dropdownPosition.top,
+							left: dropdownPosition.left,
+							width: dropdownPosition.width,
+							transform: "translateX(-50%)",
+						}}
 						onMouseEnter={() => setIsHovered.setTrue()}
 						onMouseLeave={() => setIsHovered.setFalse()}
 						onMouseDown={() => setIsHovered.setTrue()}
@@ -180,9 +251,22 @@ export function FuzzyInput({
 								<Preview item={item} showIcon={showIcon} />
 							</button>
 						))}
-					</div>
+						{data.map((entry) => (
+							<button
+								key={entry.id}
+								type="button"
+								className="border border-transparent p-2 hover:border-accent hover:bg-white/10"
+								onClick={() => {
+									setSelected(entry.name);
+									setData([]);
+								}}
+							>
+								<Preview data={entry} showIcon={showIcon} />
+							</button>
+						))}
+					</div>,
+					document.body,
 				)}
-			</div>
 		</>
 	);
 }
