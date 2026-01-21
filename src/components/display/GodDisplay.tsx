@@ -40,11 +40,16 @@ function checkSet(a: string[], b: string[]) {
 
 type ContainerProps = {
 	children: React.ReactNode;
+	// eslint-disable-next-line react/no-unused-prop-types
+	isSmall?: boolean;
 	correct?: Correctness;
-	small?: boolean;
 };
 
-function SimpleContainer({ children, small, correct = false }: ContainerProps) {
+function SimpleContainer({
+	children,
+	isSmall = false,
+	correct = false,
+}: ContainerProps) {
 	let bgColor = "bg-red-600/25";
 
 	if (correct === "partial") {
@@ -60,7 +65,7 @@ function SimpleContainer({ children, small, correct = false }: ContainerProps) {
 			<div
 				className={cn(
 					bgColor,
-					small ? "w-[16rem]" : "w-[20rem]",
+					isSmall ? "w-[16rem]" : "w-[20rem]",
 					"relative flex flex-row items-center gap-4 border border-accent p-4 backdrop-blur",
 				)}
 			>
@@ -79,7 +84,7 @@ export function SimpleDisplay({
 	return (
 		<motion.div initial="initial" animate="show" className="w-max text-base">
 			<SimpleContainer
-				small={data !== undefined}
+				isSmall={data !== undefined}
 				correct={
 					god?.Name === actualName ||
 					item?.DeviceName === actualName ||

@@ -73,6 +73,7 @@ export function FuzzyInput({
 		}
 	}, [gods, items, data, isFocused, isHovered]);
 
+	// eslint-disable-next-line consistent-return
 	useEffect(() => {
 		if (gods.length > 0 || items.length > 0 || data.length > 0) {
 			window.addEventListener("scroll", updateDropdownPosition, true);
