@@ -7,7 +7,7 @@ import { dlog } from "@/lib/utils";
 export function useSwetrix(
 	pid: string = TRACKING_ID,
 	initOptions: Swetrix.LibOptions = {
-		apiURL: "https://succ.andrisborbas.com/log",
+		apiURL: "https://succ.andrisborbas.com/backend/log",
 	},
 	pageViewsOptions: Swetrix.PageViewsOptions = {},
 ) {

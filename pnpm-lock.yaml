@@ -65,8 +65,8 @@ dependencies:
     specifier: ^3.0.5
     version: 3.0.5
   swetrix:
-    specifier: ^4.0.0
-    version: 4.0.0
+    specifier: ^4.1.0
+    version: 4.1.0
   tailwind-merge:
     specifier: ^1.13.1
     version: 1.13.1
@@ -6383,8 +6383,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /swetrix@4.0.0:
-    resolution: {integrity: sha512-IfNuvP4SipihlW8TB/wFHtRPRtWuN0fPimS2va8snsLU1MOYkWKM8FmkPqOasZfHjo3J4CcX78zt0fleAcEoig==}
+  /swetrix@4.1.0:
+    resolution: {integrity: sha512-TPOr14oYBt3LquPfWqBjRP6IhbQ+WOiz8ticORRvg4gECb3loFbHB455OUWcpXPCTaFi/E9s5TVgxgqIX+viHQ==}
     dev: false
 
   /synckit@0.8.5:
