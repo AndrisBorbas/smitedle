@@ -87,14 +87,12 @@ function AbilityButton({
 
 type WhichAbilityGameProps = {
 	actualAbility: 1 | 2 | 3 | 4 | 5;
-	actual: { god: number; ability: number };
 	onWin: () => void;
 	win: boolean;
 };
 
 function WhichAbilityGame({
 	actualAbility,
-	actual,
 	win,
 	onWin,
 }: WhichAbilityGameProps) {
@@ -102,15 +100,6 @@ function WhichAbilityGame({
 		"abilityMiniGameSelectedValue",
 		[],
 	);
-
-	// Reset game current if god changes
-	useEffect(() => {
-		if (actual.god !== -1 && actualAbility !== actual.ability) {
-			window.localStorage.removeItem("abilityMiniGameSelectedValue");
-			setSelected([]);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [actualAbility, actual.god]);
 
 	return (
 		<>
@@ -191,6 +180,7 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 			setWin(false);
 			window.localStorage.removeItem("abilityMiniGameWin");
 			setMiniGameWin(false);
+			window.localStorage.removeItem("abilityMiniGameSelectedValue");
 			setGuesses(0);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -301,7 +291,6 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 						MiniGame={
 							<WhichAbilityGame
 								actualAbility={actualAbility}
-								actual={actual}
 								win={miniGameWin}
 								onWin={() => {
 									setTimeout(() => {
