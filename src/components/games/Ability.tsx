@@ -251,6 +251,9 @@ export function AbilityGame({ gods }: AbilityGameProps) {
 								priority
 							/>
 						</div>
+						{guesses > 3 && (
+							<h4 className="mt-2">{actualGod[`Ability${actualAbility}`]}</h4>
+						)}
 					</div>
 					<FuzzyInput
 						initialGods={gods}
